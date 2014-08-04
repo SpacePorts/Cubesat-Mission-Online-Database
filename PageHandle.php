@@ -32,7 +32,7 @@ class PageHandle
 		define("PAGE_URL", SITE_URL . "Pages/" . $lurl . "/");
 		define("PAGE_GET_URL", SITE_URL ."?page-id=" . $this->_PageId );
 		define("PAGE_GET_AJAX_URL", SITE_URL ."JsonHandle.php?page-id=" . $this->_PageId );
-		require "Pages/" . $lurl ."/main.php";
+		require "Pages/" . $lurl ."/Main.php";
 
 		$this->_page = new Pages();
 	}

@@ -1,5 +1,5 @@
 <?php {
-require_once  "/Database/UserTable.php";
+require_once  "Database/UserTable.php";
 require_once "HtmlFragments/HtmlFormFragment.php";
 
 $luser = UserRow::RetrieveFromSession();
