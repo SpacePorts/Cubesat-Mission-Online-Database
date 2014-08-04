@@ -1,0 +1,5 @@
+ErrorDocument 403 http://99.71.132.143/CompanySite/error/403.php
+
+#Options +FollowSymLinks
+RewriteEngine On
+#RewriteRule ^Page/(.*)$ http://99.71.132.143/CompanySite/?page-id=$1 [L]

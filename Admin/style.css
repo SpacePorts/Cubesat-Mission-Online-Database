@@ -1,0 +1,30 @@
+#LeftMenuContainer{
+	float: left;
+	width: 120px;
+	position:  absolute;
+	top: 0px;
+	bottom:  0px;
+	background: #939393;
+	left: 0px;
+}
+.MenuSection{
+	padding: 10px 0px;
+
+}
+
+.MenuSection ul{
+	padding: 0px;
+	margin: 0px;
+}
+
+.MenuSection li{
+	display:  block;
+	background: #d8d8d8;
+	margin-bottom:3px;
+
+
+}
+
+#MainContainer{
+	padding-left: 130px;
+}
