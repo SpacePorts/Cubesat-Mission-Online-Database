@@ -26,7 +26,7 @@ class HtmlIframePanelFormListFormFragment
 		array_push($this->_searchPair,array("action"=> $action,"name"=>$name));	
 	}
 
-	public function Ajax(&$Output)
+	public function Ajax(&$output)
 	{
 		$output["search"] = $this->_searchPair;
 	}

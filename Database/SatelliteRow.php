@@ -153,35 +153,13 @@ class SatelliteRow extends Row
 		return $parts;
 	}
 
-	public function AddPart($part){
+	public function AddParts($part){
 		$SqlInsert = new SqlInsert("relation_satellite_part",$this->_db);
 		$SqlInsert->AddPair("sat_id",$this->_id);
 		$SqlInsert->AddPair("part_id",$part->GetId());
 		$SqlInsert->Execute();
 	}
 
-	public function AddPartWithId($part){
-		$SqlInsert = new SqlInsert("relation_satellite_part",$this->_db);
-		$SqlInsert->AddPair("sat_id",$this->_id);
-		$SqlInsert->AddPair("part_id",$part);
-		$SqlInsert->Execute();
-	}
-
-	public function DeletePart($part)
-	{
-		$sqlDelete = new SqlDelete("relation_satellite_part",$this->_db);
-		$sqlDelete->Where()->EqualTo("sat_id",$this->_id)->EqualTo("part_id",$part->GetId());
-		$sqlDelete->Execute();
-	
-	}
-
-	public function DeletePartWithId($part)
-	{
-		$sqlDelete = new SqlDelete("relation_satellite_part",$this->_db);
-		$sqlDelete->Where()->EqualTo("sat_id",$this->_id)->EqualTo("part_id",$part);
-		$sqlDelete->Execute();
-	
-	}
 
 
 
