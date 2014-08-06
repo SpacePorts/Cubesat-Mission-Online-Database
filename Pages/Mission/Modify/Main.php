@@ -94,12 +94,12 @@ class Pages {
 					$lwhere = new Where();
 					$lwhere->Like("name","%".Post("search")."%");
 					$satellites = $this->_satelliteTable->find(0,10,$lwhere);
-					$searchData = array();
+
 					for($x = 0; $x < count($satellites);$x++)
 					{
-						array_push($searchData, array("action"=> SITE_URL . "?page-id=Cubesat-Modify&sat_id=".$satellites[$x]->GetId()."&single=single","name"=> $satellites[$x]->GetName()));
+						$this->_satelliteFrame->addSearchPair( $satellites[$x]->GetName(),SITE_URL . "?page-id=Cubesat-Modify&sat_id=".$satellites[$x]->GetId()."&single=single");
 					}
-					$output["search"] = $searchData;
+					$this->_satelliteFrame->Ajax($output);
 				break;
 				
 				default:

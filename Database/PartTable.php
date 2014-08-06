@@ -1,7 +1,6 @@
 <?php 
 require_once "Database.php";
 require_once "PartRow.php";
-
 use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
 
@@ -10,6 +9,7 @@ class PartTable extends Table
 
    function __construct() {
        parent::__construct();
+      $this->_partVendorTable = new PartVendorTable();
    }
 
    public function GetRowById($id)
@@ -73,6 +73,7 @@ class PartTable extends Table
       return $this->GetRowById($this->_db->lastInsertId());
 
    }
+
 }
 
 ?>

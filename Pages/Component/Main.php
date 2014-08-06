@@ -42,9 +42,6 @@ class Pages {
 	function BodyContent()
 	{
 
-		?>
-		<div class="center_container">
-		<?php
 		$this->_searchForm->AddFragment("search","Search:",$this->_search);
 		$this->_searchForm->AddHiddenInput("page-id", $this->GetPageID());
 		$this->_searchForm->AddSubmitButton("search","pull-right");
@@ -60,7 +57,7 @@ class Pages {
 		for($x = 0; $x < count($lpartEntries); $x++)
 		{
 			$this->_htmlTableFragment->AddBodyRow(array(
-				"<a href='" . PAGE_GET_URL . "-Single&sat_id=".$lpartEntries[$x]->GetID()."'>" .$lpartEntries[$x]->GetFormalSpecification() . "</a>"
+				"<a href='" . PAGE_GET_URL . "-Single&component_id=".$lpartEntries[$x]->GetID()."'>" .$lpartEntries[$x]->GetFormalSpecification() . "</a>"
 			));
 
 		}
@@ -69,9 +66,7 @@ class Pages {
 		$this->_searchForm->Output();
 		?> <a href="<?php echo PAGE_GET_URL . "-Modify"; ?>">Add Component</a> <?php
 		$this->_htmlTableFragment->Output();
-		?>
-		</div>
-		<?php
+
 	}
 
 }

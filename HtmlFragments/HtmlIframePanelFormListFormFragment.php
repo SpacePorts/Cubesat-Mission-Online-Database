@@ -7,6 +7,7 @@ class HtmlIframePanelFormListFormFragment
 	private $_searchAction;
 	private $_titleExtract;
 	private $_addAction;
+	private $_searchPair = array();
 	public function __construct($extract,$seachName,$titleExtract,$searchAction,$addAction)
 	{
 		$this->_titleExtract = $titleExtract;
@@ -20,6 +21,15 @@ class HtmlIframePanelFormListFormFragment
 		array_push($this->_iframeUrl, $action);
 	}
 
+	public function addSearchPair($name,$action)
+	{
+		array_push($this->_searchPair,array("action"=> $action,"name"=>$name));	
+	}
+
+	public function Ajax(&$Output)
+	{
+		$output["search"] = $this->_searchPair;
+	}
 
 	public function Output()
 	{

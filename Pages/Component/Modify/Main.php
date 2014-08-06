@@ -1,6 +1,8 @@
 <?php
 require_once ROOT . "/Database/PartTable.php";
 require ROOT . "/HtmlFragments/HtmlFormFragment.php";
+require ROOT . "/HtmlFragments/HtmlIframePanelFormListFormFragment.php";
+
 
 require_once ROOT . "/Database/UserTable.php";
 
@@ -10,13 +12,15 @@ class Pages {
 	private $_partTable;
 	private $_form;
 	private $_component;
+	private $_venorPartsIframe;
 	function __construct() {
 		$this->_user = UserRow::RetrieveFromSession();
 		$this->_partTable = new PartTable();
 		$this->_form = new HtmlFormFragment(PAGE_GET_AJAX_URL);
-		if(isset($_REQUEST["component_id"]))
+		$this->_venorPartsIframe = new HtmlIframePanelFormListFormFragment("","vendor_parts","vendor_name",PAGE_GET_AJAX_URL,PAGE_GET_URL . "-PartVendor&single=single");
+		if(Get("component_id") != "")
 		{
-			$this->_component = $this->_partTable->GetRowById($_REQUEST["component_id"]);
+			$this->_component = $this->_partTable->GetRowById(Get("component_id"));
 		}
 
 	}
@@ -69,6 +73,7 @@ class Pages {
 			$this->_form->AddHiddenInput("component_id",$this->_component->GetId());
 			$this->_form->AddTextInput("component_formal_specification","Formal Specification:*",$this->_component->GetFormalSpecification());
 			$this->_form->AddTextInput("component_description","Component Description:*",$this->_component->GetDescription());
+			//$this->_form->AddFragment("component_vendor_parts","Vendor Parts:*", $this->_venorPartsIframe);
 			$this->_form->AddSubmitButton("Modify Spaceport","pull-right");
 		}
 		else
@@ -76,6 +81,7 @@ class Pages {
 			
 			$this->_form->AddTextInput("component_formal_specification","Formal Specification:*");
 			$this->_form->AddTextInput("component_description","Component Description:*");
+			//$this->_form->AddFragment("component_vendor_parts","Vendor Parts:*", $this->_venorPartsIframe);
 			$this->_form->AddSubmitButton("Add Spaceport","pull-right");
 		}
 

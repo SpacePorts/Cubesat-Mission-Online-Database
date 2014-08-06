@@ -1,20 +1,21 @@
 function FormProcess(iframe)
 {
-	iframe.contents().find("input[type=submit]").css("display","none");
+	$(iframe).contents().find("input[type=submit]").css("display","none");
 	
 	$(iframe).contents().find("form").on("DOMSubtreeModified",function(){
 			IFrameError(iframe);
 	});
 
-	iframe.contents().find("input[name='"+iframe.attr("title-extract")+"']").on("input",function(){
-		iframe.parent().parent().find(".panel-heading .title").html($(this).val());
+	$(iframe).contents().find("input[name='"+$(iframe).attr("title-extract")+"']").on("input",function(){
+		$(iframe).parent().parent().find(".panel-heading .title").html($(this).val());
 	});
-	iframe.contents().find("input[name='"+iframe.attr("title-extract")+"']").trigger("input");		
+	$(iframe).contents().find("input[name='"+$(iframe).attr("title-extract")+"']").trigger("input");		
 }
 
 function IFrameFill(iframe)
 {
-	$(iframe).height($(iframe).contents().find("#Wrapper").height());
+
+	$(iframe).height($(iframe).contents().find("#Page").height()+40);
 }
 
 function IFrameError(iframe)
@@ -39,7 +40,7 @@ $(document).ready(function(){
 	{
 		$(this).load(function(){
 			IFrameFill(this);
-			FormProcess($(this));
+			FormProcess(this);
 		});
 	});
 
@@ -115,6 +116,7 @@ $(document).ready(function(){
 			$(this).find("span").addClass("glyphicon-minus");
 			$(this).find("span").removeClass("glyphicon-plus");
 		}
+		IFrameFill($(this).parent().parent().find("iframe"));
 		return false;
 	});
 

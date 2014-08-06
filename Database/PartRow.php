@@ -1,17 +1,22 @@
 <?php
 require_once "Database.php";
+require_once "PartVendorTable.php";
+
 class PartRow extends Row
 {
 	private $_id;
 	private $_description;
 	private $_formalSpecification;
+
+	private $_partVendorTable;
+
 	public function __construct($PartData)
 	{
 		parent::__construct();
+		$this->_partVendorTable = new PartVendorTable();
 		$this->_id = $PartData["part_id"];
 		$this->_description = $PartData["description"];
 		$this->_formalSpecification = $PartData["formal_specification"];
-
 	}
 
 	public function GetId(){
@@ -43,6 +48,18 @@ class PartRow extends Row
 		$lsqlUpdate->AddPair("formal_specification",$this->_formalSpecification);
 		$lsqlUpdate->Execute();
 	}
+
+	
+   public function GetPartVendor()
+   {
+   		return $this->_partVendorTable->GetEntriesByPartId($this->GetId());
+   }
+
+   public function AddPartVendor($catalogEntry,$venodrId,$vendorModelNumber)
+   {
+   		$this->_partVendorTable->AddPartVendor($catalogEntry,$venodrId,$this->GetId(),$vendorModelNumber);
+   }
+
 }
 
 ?>
