@@ -33,6 +33,10 @@ class HtmlIframePanelFormListFormFragment
 
 	public function Output()
 	{
+		if(empty($this->_searchPair))
+			$this->AddIframe($this->_addAction);
+
+
 		?>
 		<div class="iframe-list iframe-panel">
 			<div class="dropdown">

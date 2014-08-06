@@ -108,21 +108,19 @@ class Pages {
 								$this->_satellite = $this->_satTable->AddSatellite(Post("sat_name"),Post("sat_content"),Post("sat_tle"),Post("sat_orbit"),Post("sat_wiki"),Post("sat_status"));
 								
 							}
-							
+
+							$lcomponents =   array();
+							if(Post("component_id") != "")
+								$lcomponent = array_unique(Post("component_id"));
+								
+			
+							for($x = 0; $x < count($lcomponents);$x++)
+							{
+								$lcomponents[$x] = $this->_partTable->GetRowById($lcomponents[$x]);
+							}
+
 							//NEEDS REWORKING REALLY SLOW
-							$_POST["sat_parts"] = array_unique($_POST["sat_parts"]);
-							$lPartIds = $this->_satellite->GetPartsAsId();
-
-							$lAddParts = array_diff ($_POST["sat_parts"],$lPartIds);
-							$lRemoveParts = array_diff ($lPartIds,$_POST["sat_parts"]);
-
-							foreach ($lAddParts as $value) {
-								$this->_satellite->AddPartWithId($value);
-							}
-
-							foreach ($lRemoveParts as $value) {
-								$this->_satellite->DeletePartWithId($value);
-							}
+							$this->_satellite->AddParts($lcomponent);
 
 							if(Post("single") == "single")
 								$output["redirect"] = SITE_URL . "?page-id=Cubesat-Modify&sat_id=".$this->_satellite->GetId() . "&single=single";
@@ -158,17 +156,16 @@ class Pages {
 			$this->_form->AddHiddenInput("single","single");
 		
 
-	/*	if(isset($this->_satellite))
-		{
-			$parts = $this->_satellite->GetParts();
-			for($x =0; $x < count($this->_satellite->GetParts()); $x++)
-			{
-				$this->_PartSelection->AddPair($this->_satellite->GetParts()[$x]->GetId(),$this->_satellite->GetParts()[$x]->GetFormalSpecification());
-			}
-		}*/
-
 		if(isset($this->_satellite))
 		{
+			$parts = $this->_satellite->GetParts();
+			for($x =0; $x < count($parts);$x++)
+			{
+				
+				$this->_PartSelection->AddIFrame(SITE_URL . "?page-id=Component-Modify&single=single&component_id=".$parts[$x]->GetId());
+			}
+
+
 			$this->_form->AddHiddenInput("sat_id",$this->_satellite->GetId());
 			$this->_form->AddHiddenInput("type","sat_form");
 			$this->_form->AddTextInput("sat_name","Name:*",$this->_satellite->GetName());
@@ -182,8 +179,7 @@ class Pages {
 		}
 		else
 		{
-			$this->_PartSelection->AddIFrame(SITE_URL . "?page-id=Component-Modify&single=single");
-
+	
 			$this->_form->AddHiddenInput("type","sat_form");
 			$this->_form->AddTextInput("sat_name","Name:*");
 			$this->_form->AddTextarea("sat_content","Content:");

@@ -2,6 +2,10 @@
 require_once "Database.php";
 require_once "PartTable.php";
 
+
+use Zend\Db\Sql\Sql;
+use Zend\Db\ResultSet\ResultSet;
+
 class SatelliteRow extends Row
 {
 	private $_content;
@@ -122,42 +126,44 @@ class SatelliteRow extends Row
 		$sqlUpdate->Execute();
 	}
 
-	/**
-	*return all the parts that relative to the satellite row
-	**/
+	public function AddParts($parts)
+	{
+		$sql = new Sql($this->_adapter,"relation_satellite_part");
+
+		$ldelete = $sql->delete();
+		$ldelete->where(array("sat_id" => $this->GetId()));
+		$sql->prepareStatementForSqlObject($ldelete)->execute();
+
+		for($x =0; $x <	count($parts);$x++)
+		{
+			$linsert = $sql->insert();
+			$linsert->values(array("sat_id"=>$this->GetId(),"part_id"=>$parts[$x]->GetId()));
+			$sql->prepareStatementForSqlObject($linsert)->execute();
+		}
+	}
+
+
 	public function GetParts()
 	{
-		$sqlSelect = new SqlSelect("relation_satellite_part",$this->_db);
-		$sqlSelect->Where()->EqualTo("sat_id",$this->_id);
-	 	$stmt =  $sqlSelect->Execute();
+
+		$sql = new Sql($this->_adapter,"part");
+		
+		$lselect = $sql->select();
+		$lselect->join("relation_satellite_part","relation_satellite_part.part_id = part.part_id");
+		$lselect->where(array("relation_satellite_part.sat_id" => $this->GetId()));
+
+	  	$lresults = $sql->prepareStatementForSqlObject($lselect)->execute();
+
+		$resultSet = new ResultSet;
+		$resultSet->initialize($lresults);
 
 		$parts = array();
-
-		while ($row = $stmt->fetch()) {
-			array_push($parts,$this->_partTable->GetRowById($row["part_id"]));
+		foreach ($resultSet as $row) {
+			array_push($parts,new PartRow($row));
 		}
+
 		return $parts;
-	}
 
-	public function GetPartsAsId()
-	{
-		$sqlSelect = new SqlSelect("relation_satellite_part",$this->_db);
-		$sqlSelect->Where()->EqualTo("sat_id",$this->_id);
-	 	$stmt =  $sqlSelect->Execute();
-
-		$parts = array();
-
-		while ($row = $stmt->fetch()) {
-			array_push($parts,$row["part_id"]);
-		}
-		return $parts;
-	}
-
-	public function AddParts($part){
-		$SqlInsert = new SqlInsert("relation_satellite_part",$this->_db);
-		$SqlInsert->AddPair("sat_id",$this->_id);
-		$SqlInsert->AddPair("part_id",$part->GetId());
-		$SqlInsert->Execute();
 	}
 
 
