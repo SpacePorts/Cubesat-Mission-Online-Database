@@ -88,7 +88,7 @@ class Pages {
 						if(Post("sat_orbit") == "")
 							$error->AddErrorPair("sat_orbit","Orbit required");
 
-						if(Post("sat_parts") == "")
+						if(Post("component_id") == "")
 							$error->AddErrorPair("sat_parts","Satellite Parts required");
 
 						if(!$error->HasError())
@@ -111,7 +111,7 @@ class Pages {
 
 							$lcomponents =   array();
 							if(Post("component_id") != "")
-								$lcomponent = array_unique(Post("component_id"));
+								$lcomponents = array_unique(Post("component_id"));
 								
 			
 							for($x = 0; $x < count($lcomponents);$x++)
@@ -120,7 +120,7 @@ class Pages {
 							}
 
 							//NEEDS REWORKING REALLY SLOW
-							$this->_satellite->AddParts($lcomponent);
+							$this->_satellite->AddParts($lcomponents);
 
 							if(Post("single") == "single")
 								$output["redirect"] = SITE_URL . "?page-id=Cubesat-Modify&sat_id=".$this->_satellite->GetId() . "&single=single";
