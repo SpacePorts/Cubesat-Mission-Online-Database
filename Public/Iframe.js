@@ -89,7 +89,6 @@ $(document).ready(function(){
 		
 		var lpanel = $(this).parent().parent().parent().parent().parent().find(".retractable-panel").first().clone();
 		lpanel.attr("src",$(this).attr("action"));
-		lpanel.find(".panel-heading").append("<a href='#' class='delete-button pull-right'>X</a>");
 		lpanel.find("iframe").attr("src",$(this).attr("action"))
 		lpanel.find("iframe").load(function(){
 			FormProcess(lpanel.find("iframe"));
@@ -122,7 +121,6 @@ $(document).ready(function(){
 
 	$(".iframe-list").delegate(".add-another","click",function(){
 		var lpanel = $(this).parent().find(".retractable-panel").first().clone();
-		lpanel.find(".panel-heading").append("<a href='#' class='delete-button pull-right'>X</a>");
 		lpanel.find("iframe").attr("src",$(this).attr("action"))
 		lpanel.find("iframe").load(function(){
 			FormProcess(lpanel.find("iframe"));

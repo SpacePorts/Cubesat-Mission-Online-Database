@@ -33,7 +33,7 @@ class HtmlIframePanelFormListFormFragment
 
 	public function Output()
 	{
-		if(empty($this->_searchPair))
+		if(count($this->_iframeUrl) == 0)
 			$this->AddIframe($this->_addAction);
 
 
@@ -47,7 +47,7 @@ class HtmlIframePanelFormListFormFragment
 			<div class="iframe-container">
 				<?php for($x = 0; $x < count($this->_iframeUrl);$x++): ?>
 				<div class="panel panel-default retractable-panel">
-					 <div class="panel-heading"><a href="#" class="expand-button"><span class="glyphicon-plus"></span></a><span class="title"></span></div>
+					 <div class="panel-heading"><a href="#" class="expand-button"><span class="glyphicon-plus"></span></a><span class="title"></span><a href='#' class='delete-button pull-right'>X</a></div>
 					<div class="panel-body" style="display:none;">
 						<iframe seamless title-extract="<?php echo $this->_titleExtract ?>" extract="<?php echo $this->_extract; ?>" src="<?php echo $this->_iframeUrl[$x]; ?>"></iframe>
 						
