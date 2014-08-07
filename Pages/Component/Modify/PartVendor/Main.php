@@ -1,11 +1,18 @@
 <?php
-require ROOT . "/HtmlFragments/HtmlFormFragment.php";
+require_once ROOT . "/Database/PartVendorTable.php";
+require_once ROOT . "/Database/PartTable.php";
+require_once ROOT . "/Database/VendorTable.php";
 
-//Get()
+require_once ROOT . "/HtmlFragments/HtmlFormFragment.php"
 class Pages {
+	private $_vendorTable;
+	private $_partTable;
+	private $_partVendorTable;
+
 	private $_form;
 	function __construct() {
-		$this->_form = new HtmlFormFragment(PAGE_GET_AJAX_URL);
+		$this->_form = new HtmlFormFragment();
+
 
 	}
 		
@@ -16,13 +23,12 @@ class Pages {
 
 	function Ajax($error,&$output)
 	{
-	
+
 	}
 
 	function BodyContent()
 	{
-		
-		
+
 	}
 
 }

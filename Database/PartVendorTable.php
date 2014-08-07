@@ -1,6 +1,8 @@
 <?php 
 require_once "Database.php";
 require_once "PartVendorRow.php";
+require_once "VendorRow.php";
+require_once "PartRow.php";
 
 use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
@@ -31,15 +33,15 @@ class PartVendorTable extends Table
 
    }
 
-   public function AddPartVendor($catalogEntry,$venodrId,$PartId,$vendorModelNumber)
+   public function AddPartVendor($catalogEntry,$vendor,$part,$vendorModelNumber)
    {
 
       $sql = new Sql($this->_adapter,"relation_part_vendor");
       $linsert = $sql->insert();
       $linsert->values(array(
-       'part_id' => $PartId,
+       'part_id' => $part->GetId(),
        'vendor_catalog_entry' => $catalogEntry,
-       'vendor_id' => $venodrId,
+       'vendor_id' => $vendor->GetId(),
        'vendor_model_number' => $vendorModelNumber
       ));
 
@@ -49,12 +51,12 @@ class PartVendorTable extends Table
    }
 
 
-   public function GetEntriesByPartId($partId)
+   public function GetEntriesByPart($part)
    {
 
       $sql = new Sql($this->_adapter,"relation_part_vendor");
       $lselect = $sql->Select();
-      $lselect->where(array("part_id"=>$partId));
+      $lselect->where(array("part_id"=>$part->GetId()));
 
       $lresults = $sql->prepareStatementForSqlObject($lselect)->execute();
       
@@ -72,11 +74,11 @@ class PartVendorTable extends Table
 
 
 
-   public function GetEntriesByVendorId($venodrId)
+   public function GetEntriesByVendor($vendor)
    {
       $sql = new Sql($this->_adapter,"relation_part_vendor");
       $lselect = $sql->Select();
-      $lselect->where(array("vendor_id"=>$venodrId));
+      $lselect->where(array("vendor_id"=>$vendor->GetById()));
 
       $lresults = $sql->prepareStatementForSqlObject($lselect)->execute();
       

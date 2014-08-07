@@ -52,13 +52,10 @@ class PartRow extends Row
 	
    public function GetPartVendor()
    {
-   		return $this->_partVendorTable->GetEntriesByPartId($this->GetId());
+   		return $this->_partVendorTable->GetEntriesByPart($this);
    }
 
-   public function AddPartVendor($catalogEntry,$venodrId,$vendorModelNumber)
-   {
-   		$this->_partVendorTable->AddPartVendor($catalogEntry,$venodrId,$this->GetId(),$vendorModelNumber);
-   }
+
 
 }
 
