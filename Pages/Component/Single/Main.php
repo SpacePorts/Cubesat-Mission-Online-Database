@@ -4,7 +4,7 @@ require_once ROOT . "/Database/PartTable.php";
 
 
 require ROOT . "/HtmlFragments/HtmlTableFragment.php";
-class Pages {
+class Pages extends PageBase{
 	private $_partTable;
 	private $_part;
 	private $_htmlTableFragment;

@@ -10,9 +10,7 @@
 
 	if(!isset($_GET["page-id"]))
 		$_GET["page-id"] ="";
-	$pageHandle = new PageHandle($_GET["page-id"]);
-
-
+	$pageHandle = new PageHandle();
 
 ?>
 
@@ -50,7 +48,11 @@
  	<body>
 	 	<div id="Wrapper" >
 	 		<div id="Page">
+	 			<?php  if($pageHandle->GetPage()->IsUserLegal()): ?>
 	 				<?php $pageHandle->GetPage()->BodyContent(); ?>
+	 			<?php else: ?>
+	 				<h1>Access Denied</h1>
+	 			<?php endif; ?>
 	 		</div>
 	 	</div >
 	 </body>
@@ -62,7 +64,11 @@
 	 	<div id="Wrapper" >
 		 	<?php require "Header.php"; ?>
 	 		<div id="Page" class="center_container">
+	 			<?php  if($pageHandle->GetPage()->IsUserLegal()): ?>
 	 				<?php $pageHandle->GetPage()->BodyContent(); ?>
+	 			<?php else: ?>
+	 				<h1>Access Denied</h1>
+	 			<?php endif; ?>
 	 		</div>
 	 	</div >
 	 		<footer id="Footer" class="center_container">

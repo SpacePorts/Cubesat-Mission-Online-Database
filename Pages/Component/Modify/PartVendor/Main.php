@@ -9,7 +9,7 @@ require_once ROOT . "/HtmlFragments/HtmlDropdownFragment.php";
 require_once ROOT . "/HtmlFragments/HtmlFormFragment.php";
 use Zend\Db\Sql\Where;
 use Respect\Validation\Validator as v;
-class Pages {
+class Pages extends PageBase {
 
 	private $_user;
 

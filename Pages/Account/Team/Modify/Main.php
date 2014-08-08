@@ -2,7 +2,7 @@
 require ROOT . "/HtmlFragments/HtmlFormFragment.php";
 
 use Respect\Validation\Validator as v;
-class Pages {
+class Pages extends PageBase{
 
 	private $_form;
 

@@ -1,7 +1,7 @@
 <?php
 require_once ROOT . "/Database/PartVendorTable.php";
 
-class Pages {
+class Pages extends PageBase{
 
 	private $_partVendorTable;
 	private $_partVendor;

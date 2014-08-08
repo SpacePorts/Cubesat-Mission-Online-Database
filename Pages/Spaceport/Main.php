@@ -8,7 +8,7 @@ require ROOT . "/HtmlFragments/HtmlPaginationFragment.php";
 
 use Zend\Db\Sql\Where;
 
-class Pages {
+class Pages extends PageBase {
 
 	private $_htmlTableFragment;
 	private $_spaceportTable;
@@ -48,7 +48,7 @@ class Pages {
 	
 		<?php
 
-			$this->_searchForm->AddFragment("search","Search:",$this->_search);
+		$this->_searchForm->AddFragment("search","Search:",$this->_search);
 		$this->_searchForm->AddHiddenInput("page-id", $this->GetPageID());
 		$this->_searchForm->AddSubmitButton("search","pull-right");
 		$this->_searchForm->Output();
@@ -64,9 +64,9 @@ class Pages {
 		for($x = 0; $x < count($Spaceport); $x++)
 		{
 			$this->_htmlTableFragment->AddBodyRow(array(
-				"<a href='" . PAGE_GET_URL . "-Single&sat_id=".$Spaceport[$x]->GetId()."'>" .$Spaceport[$x]->GetName() . "</a>",
-				$Spaceport[$x]->GetUrl(),
-				$Spaceport[$x]->GetGoogleMapUrl()
+				"<a href='" . PAGE_GET_URL . "-Single&spaceport_id=".$Spaceport[$x]->GetId()."'>" .$Spaceport[$x]->GetName() . "</a>",
+				"<a href='" . PAGE_GET_URL . "-Single&spaceport_id=".$Spaceport[$x]->GetId()."'>" .$Spaceport[$x]->GetUrl(). "</a>",
+				"<a href='" . PAGE_GET_URL . "-Single&spaceport_id=".$Spaceport[$x]->GetId()."'>" .$Spaceport[$x]->GetGoogleMapUrl(). "</a>"
 				));
 
 		}

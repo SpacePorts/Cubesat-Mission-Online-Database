@@ -1,5 +1,5 @@
 <?php 
-
+require "PageBase.php";
 
 class PageHandle
 {
@@ -7,7 +7,7 @@ class PageHandle
 	private $_explodedPage = array();
 	private $_PageId;
 
-	function __construct($pageURL) {
+	function __construct() {
 		if(empty($_GET["page-id"]))
 			$_GET["page-id"] = "Home";
 

@@ -4,7 +4,7 @@ require ROOT . "/HtmlFragments/HtmlFormFragment.php";
 
 require_once ROOT . "/Database/UserTable.php";
 
-class Pages {
+class Pages extends PageBase {
 
 	private $_user;
 
@@ -29,45 +29,56 @@ class Pages {
 
 	}
 
-	function Ajax($error,&$output)
+	public function IsUserLegal()
 	{
-		if($this->_user->GetType() == UserRow::PRODUCER)
+		if(isset($this->_user))
 		{
-			if(empty($_POST["spaceport_name"]))
-					$error->AddErrorPair("spaceport_name","Name Required");
-
-			if(empty($_POST["spaceport_latlong"]))
-				$error->AddErrorPair("spaceport_latlong","Lat Long is require");
-
-			if(empty($_POST["spaceport_url"]))
-				$_POST["spaceport_url"]= "";
-
-			if(empty($_POST["spaceport_description"]))
-				$error->AddErrorPair("spaceport_description","Description Required");
-
-			if(empty($_POST["spaceport_url_googlemap"]))
-				$_POST["spaceport_url_googlemap"]="";
-
-			if(!$error->HasError())
+			if($this->_user->GetType() == UserRow::PRODUCER || $this->_user->GetType() == UserRow::ADMIN)
 			{
-				if(isset($_POST["spaceport_id"]))
-				{
-					$lspacePort = $this->_spaceportTable->GetRowById($_POST["spaceport_id"]);
-					$lspacePort->SetName($_POST["spaceport_name"]);
-					$lspacePort->SetLatLong($_POST["vendor_url"]);
-					$lspacePort->SetUrl($_POST["vendor_contactInfo"]);
-					$lspacePort->SetDescription($_POST["vendor_type"]);
-					$lspacePort->setGoogleMapUrl($_POST["vendor_type"]);
-					$lspacePort->Update();
-				}	
-				else
-				{
-					
-					$this->_spaceportTable->AddSpaceport($_POST["spaceport_name"],$_POST["spaceport_latlong"],$_POST["spaceport_url"],$_POST["spaceport_description"],$_POST["spaceport_url_googlemap"]);
-					
-				}
+				return true;
 			}
 		}
+		return false;
+	}
+
+	function Ajax($error,&$output)
+	{
+		
+		if(empty($_POST["spaceport_name"]))
+				$error->AddErrorPair("spaceport_name","Name Required");
+
+		if(empty($_POST["spaceport_latlong"]))
+			$error->AddErrorPair("spaceport_latlong","Lat Long is require");
+
+		if(empty($_POST["spaceport_url"]))
+			$_POST["spaceport_url"]= "";
+
+		if(empty($_POST["spaceport_description"]))
+			$error->AddErrorPair("spaceport_description","Description Required");
+
+		if(empty($_POST["spaceport_url_googlemap"]))
+			$_POST["spaceport_url_googlemap"]="";
+
+		if(!$error->HasError())
+		{
+			if(isset($_POST["spaceport_id"]))
+			{
+				$lspacePort = $this->_spaceportTable->GetRowById($_POST["spaceport_id"]);
+				$lspacePort->SetName($_POST["spaceport_name"]);
+				$lspacePort->SetLatLong($_POST["vendor_url"]);
+				$lspacePort->SetUrl($_POST["vendor_contactInfo"]);
+				$lspacePort->SetDescription($_POST["vendor_type"]);
+				$lspacePort->setGoogleMapUrl($_POST["vendor_type"]);
+				$lspacePort->Update();
+			}	
+			else
+			{
+				
+				$this->_spaceportTable->AddSpaceport($_POST["spaceport_name"],$_POST["spaceport_latlong"],$_POST["spaceport_url"],$_POST["spaceport_description"],$_POST["spaceport_url_googlemap"]);
+				
+			}
+		}
+		
 	}
 
 

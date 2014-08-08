@@ -3,7 +3,7 @@ require ROOT . "/Database/VendorTable.php";
 require ROOT . "/HtmlFragments/HtmlFormFragment.php";
 
 require_once ROOT . "/Database/UserTable.php";
-class Pages {
+class Pages  extends PageBase{
 	private $_vendorTable;
 	private $_form;
 	private $_vendor;
@@ -20,49 +20,60 @@ class Pages {
 
 	}
 	
-	function HeaderContent()
+	public function HeaderContent()
 	{
 
 	}
 
-	function Ajax($error,&$output)
+	public function IsUserLegal()
 	{
-		if($this->_user->GetType() == UserRow::PRODUCER)
+		if(isset($this->_user))
 		{
-
-			if(empty($_POST["vendor_name"]))
-					$error->AddErrorPair("vendor_name","Vendor Name Required");
-
-			if(empty($_POST["vendor_url"]))
-				$error->AddErrorPair("vendor_url","Vendor Url Required");
-
-			if(empty($_POST["vendor_contactInfo"]))
-				$error->AddErrorPair("vendor_contactInfo","Vendor Contact Info Required");
-
-			if(empty($_POST["vendor_type"]))
-				$error->AddErrorPair("vendor_type","Vendor Type Required");
-
-			if(!$error->HasError())
+			if($this->_user->GetType() == UserRow::PRODUCER || $this->_user->GetType() == UserRow::ADMIN)
 			{
-				if(isset($_POST["vendor_id"]))
-				{
-					$this->_vendor = $this->_vendorTable->GetRowById($_POST["vendor_id"]);
-					$this->_vendor->SetName($_POST["vendor_name"]);
-					$this->_vendor->SetUrl($_POST["vendor_url"]);
-					$this->_vendor->SetContactInfo($_POST["vendor_contactInfo"]);
-					$this->_vendor->SetType($_POST["vendor_type"]);
-					$this->_vendor->Update();
-				}	
-				else
-				{
-					$this->_vendor = $this->_vendorTable->addVendor($_POST["vendor_name"],$_POST["vendor_url"],$_POST["vendor_contactInfo"],$_POST["vendor_type"]);
-				}
-				if(Post("single") == "single")
-					$output["redirect"] = SITE_URL . "?page-id=Vendor-Modify&vendor-id=".$this->_vendor->GetId() . "&single=single";
-				else
-					$output["redirect"] = SITE_URL . "?page-id=Vendor-Modify&vendor-id=".$this->_vendor->GetId();
+				return true;
 			}
 		}
+		return false;
+	}
+
+	public function Ajax($error,&$output)
+	{
+
+
+		if(empty($_POST["vendor_name"]))
+				$error->AddErrorPair("vendor_name","Vendor Name Required");
+
+		if(empty($_POST["vendor_url"]))
+			$error->AddErrorPair("vendor_url","Vendor Url Required");
+
+		if(empty($_POST["vendor_contactInfo"]))
+			$error->AddErrorPair("vendor_contactInfo","Vendor Contact Info Required");
+
+		if(empty($_POST["vendor_type"]))
+			$error->AddErrorPair("vendor_type","Vendor Type Required");
+
+		if(!$error->HasError())
+		{
+			if(isset($_POST["vendor_id"]))
+			{
+				$this->_vendor = $this->_vendorTable->GetRowById($_POST["vendor_id"]);
+				$this->_vendor->SetName($_POST["vendor_name"]);
+				$this->_vendor->SetUrl($_POST["vendor_url"]);
+				$this->_vendor->SetContactInfo($_POST["vendor_contactInfo"]);
+				$this->_vendor->SetType($_POST["vendor_type"]);
+				$this->_vendor->Update();
+			}	
+			else
+			{
+				$this->_vendor = $this->_vendorTable->addVendor($_POST["vendor_name"],$_POST["vendor_url"],$_POST["vendor_contactInfo"],$_POST["vendor_type"]);
+			}
+			if(Post("single") == "single")
+				$output["redirect"] = SITE_URL . "?page-id=Vendor-Modify&vendor-id=".$this->_vendor->GetId() . "&single=single";
+			else
+				$output["redirect"] = SITE_URL . "?page-id=Vendor-Modify&vendor-id=".$this->_vendor->GetId();
+		}
+		
 	}
 
 

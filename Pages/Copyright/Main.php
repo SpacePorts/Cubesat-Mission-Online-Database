@@ -1,5 +1,5 @@
 <?php
-class Pages {
+class Pages  extends PageBase{
 function HeaderContent()
 {
 

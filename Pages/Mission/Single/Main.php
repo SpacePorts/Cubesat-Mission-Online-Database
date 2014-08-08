@@ -2,8 +2,7 @@
 require_once ROOT . "/Database/MissionTable.php";
 require ROOT . "/HtmlFragments/HtmlIframePanelFragment.php";
 
-
-class Pages {
+class Pages extends PageBase{
 
 	private $_mission;
 	private $_missionTable;

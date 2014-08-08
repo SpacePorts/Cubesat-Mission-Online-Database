@@ -14,6 +14,7 @@
 	{
 
 		$page = new PageHandle($_GET["page-id"]);
+		if($page->GetPage()->IsUserLegal())
 		$page->GetPage()->Ajax($lerror,$loutput);
 
 	}

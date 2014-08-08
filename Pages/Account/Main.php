@@ -7,7 +7,7 @@ require ROOT . "/ImageStorage.php";
 
 use Respect\Validation\Validator as v;
 
-class Pages {
+class Pages  extends PageBase{
 
 	private $_changePasswordForm;
 	private $_userProfileForm;

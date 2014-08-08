@@ -11,7 +11,7 @@ require_once ROOT . "/Database/UserTable.php";
 use Respect\Validation\Validator as v;
 use Zend\Db\Sql\Where;
 
-class Pages {
+class Pages extends PageBase {
 	private $_satTable;
 	private $_satellite;
 
@@ -65,12 +65,22 @@ class Pages {
 		return  "Cubesat-Modify";
 	}
 
+	public function IsUserLegal()
+	{
+		if(isset($this->_user))
+		{
+			if($this->_user->GetType() == UserRow::PRODUCER || $this->_user->GetType() == UserRow::ADMIN)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	function Ajax($error,&$output)
 	{
-		if($this->_user->GetType() == UserRow::PRODUCER)
-		{
-
+	
 			switch (Post("type"))
 			{
 				case 'sat_form':
@@ -145,9 +155,7 @@ class Pages {
 
 				break;
 			}
-		}
 
-		
 	}
 
 	function BodyContent()

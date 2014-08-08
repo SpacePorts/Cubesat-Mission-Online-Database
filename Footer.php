@@ -29,4 +29,4 @@
 	</div>
 </div-->
 <address ><div id="CopyRight">&copy;Copyright Space Port</div>
-<div>Alpha 1.0.4</div></address>
+<div>Alpha 1.0.5</div></address>

@@ -6,7 +6,15 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Zend\\Validator\\' => array($vendorDir . '/zendframework/zend-validator'),
+    'Zend\\Stdlib\\' => array($vendorDir . '/zendframework/zend-stdlib'),
+    'Zend\\ServiceManager\\' => array($vendorDir . '/zendframework/zend-servicemanager'),
+    'Zend\\Mime\\' => array($vendorDir . '/zendframework/zend-mime'),
+    'Zend\\Math\\' => array($vendorDir . '/zendframework/zend-math'),
+    'Zend\\Mail\\' => array($vendorDir . '/zendframework/zend-mail'),
+    'Zend\\Loader\\' => array($vendorDir . '/zendframework/zend-loader'),
     'Zend\\Db\\' => array($vendorDir . '/zendframework/zend-db'),
+    'Zend\\Crypt\\' => array($vendorDir . '/zendframework/zend-crypt'),
     'Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),
     'Respect\\Validation' => array($vendorDir . '/respect/validation/library'),
     'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src'),

@@ -9,7 +9,7 @@ require ROOT . "/HtmlFragments/HtmlIframePanelFormListFormFragment.php";
 use Respect\Validation\Validator as v;
 use Zend\Db\Sql\Where;
 
-class Pages {
+class Pages extends PageBase {
 
 	private $_user;
 
@@ -45,11 +45,22 @@ class Pages {
 		return "Mission-Modify";
 	}
 
+	public function IsUserLegal()
+	{
+		if(isset($this->_user))
+		{
+			if($this->_user->GetType() == UserRow::PRODUCER || $this->_user->GetType() == UserRow::ADMIN)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	function Ajax($error,&$output)
 	{
-		if($this->_user->GetType() == UserRow::PRODUCER)
-		{
+	
 			switch (Post("type")) {
 				case 'mission-form':
 
@@ -106,7 +117,7 @@ class Pages {
 					# code...
 					break;
 			}
-		}
+		
 
 	}
 

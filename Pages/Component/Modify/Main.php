@@ -6,7 +6,7 @@ require ROOT . "/HtmlFragments/HtmlIframePanelFormListFormFragment.php";
 
 require_once ROOT . "/Database/UserTable.php";
 
-class Pages {
+class Pages extends PageBase {
 	private $_user;
 
 	private $_partTable;
@@ -29,37 +29,49 @@ class Pages {
 
 	}
 
-	function Ajax($error,&$output)
+
+	public function IsUserLegal()
 	{
-		if($this->_user->GetType() == UserRow::PRODUCER)
+		if(isset($this->_user))
 		{
-			if(empty($_POST["component_formal_specification"]))
-				$error->AddErrorPair("component_formal_specification","Formal Specification required");
-			
-
-			if(!isset($_POST["component_description"]))
-				$_POST["component_description"] = "Description Required";
-
-
-			if(!$error->HasError())
+			if($this->_user->GetType() == UserRow::PRODUCER || $this->_user->GetType() == UserRow::ADMIN)
 			{
-				if(isset($_POST["component_id"]))
-				{
-					$this->_component = $this->_partTable->GetRowById($_POST["component_id"]);
-					$this->_component->SetFormalSpecification($_POST["component_formal_specification"]);
-					$this->_component->Update();
-				}
-				else
-				{
-					$this->_component = $this->_partTable->AddPart($_POST["component_description"],$_POST["component_formal_specification"]);
-				}
-
-				if(Post("single") == "single")
-					$output["redirect"] = SITE_URL. "?page-id=Component-Modify&component_id=".$this->_component->GetId() . "&single=single";
-				else
-					$output["redirect"] = SITE_URL . "?page-id=Component-Modify&component_id=".$this->_component->GetId();
+				return true;
 			}
 		}
+		return false;
+	}
+
+	function Ajax($error,&$output)
+	{
+	
+		if(empty($_POST["component_formal_specification"]))
+			$error->AddErrorPair("component_formal_specification","Formal Specification required");
+		
+
+		if(!isset($_POST["component_description"]))
+			$_POST["component_description"] = "Description Required";
+
+
+		if(!$error->HasError())
+		{
+			if(isset($_POST["component_id"]))
+			{
+				$this->_component = $this->_partTable->GetRowById($_POST["component_id"]);
+				$this->_component->SetFormalSpecification($_POST["component_formal_specification"]);
+				$this->_component->Update();
+			}
+			else
+			{
+				$this->_component = $this->_partTable->AddPart($_POST["component_description"],$_POST["component_formal_specification"]);
+			}
+
+			if(Post("single") == "single")
+				$output["redirect"] = SITE_URL. "?page-id=Component-Modify&component_id=".$this->_component->GetId() . "&single=single";
+			else
+				$output["redirect"] = SITE_URL . "?page-id=Component-Modify&component_id=".$this->_component->GetId();
+		}
+		
 	}
 
 	function BodyContent()

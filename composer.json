@@ -6,6 +6,7 @@
 	"require": {
         "zendframework/zend-db": "2.0.*",
         "respect/validation": "0.6.1",
-         "intervention/image": "2.*"
+         "intervention/image": "2.*",
+         "zendframework/zend-mail" : "2.*"
     }
 }

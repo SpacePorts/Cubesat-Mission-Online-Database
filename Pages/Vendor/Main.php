@@ -9,7 +9,7 @@ require ROOT . "/HtmlFragments/HtmlPaginationFragment.php";
 
 use Zend\Db\Sql\Where;
 
-class Pages {
+class Pages  extends PageBase{
 	private $_htmlTableFragment;
 	private $_vendorTable;
 
