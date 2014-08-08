@@ -9,7 +9,7 @@ require_once ROOT . "/HtmlFragments/HtmlDropdownFragment.php";
 require_once ROOT . "/HtmlFragments/HtmlFormFragment.php";
 use Zend\Db\Sql\Where;
 use Respect\Validation\Validator as v;
-class Pages extends PageBase {
+class Modify extends PageBase {
 
 	private $_user;
 
@@ -86,9 +86,9 @@ class Pages extends PageBase {
 				}
 
 				if(Post("single") == "single")
-					$output["redirect"] = SITE_URL. "?page-id=Component-Modify-PartVendor&part_vendor_id=".$this->_partVendor->GetId() . "&single=single";
+					$output["redirect"] = SITE_URL. "?page-id=Component-PartVendor-Modify&part_vendor_id=".$this->_partVendor->GetId() . "&single=single";
 				else
-					$output["redirect"] = SITE_URL . "?page-id=Component-Modify-PartVendor&part_vendor_id=".$this->_partVendor->GetId();
+					$output["redirect"] = SITE_URL . "?page-id=Component-PartVendor-Modify&part_vendor_id=".$this->_partVendor->GetId();
 			}
 		}
 	}

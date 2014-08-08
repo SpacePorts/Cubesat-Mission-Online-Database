@@ -1,7 +1,7 @@
 <?php
 require_once ROOT . "/Database/SatelliteTable.php";
 require ROOT . "/HtmlFragments/HtmlTableFragment.php";
-class Pages extends PageBase{
+class Single extends PageBase{
 	private $_satelliteTable;
 
 	function __construct() {

@@ -1,7 +1,7 @@
 <?php
 require ROOT . "/Database/SpaceportTable.php";
 
-class Pages extends PageBase
+class Single extends PageBase
 {
 	private $_spaceportTable;
 	private $_spaceport;

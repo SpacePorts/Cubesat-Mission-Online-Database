@@ -9,7 +9,7 @@ require ROOT . "/HtmlFragments/HtmlIframePanelFormListFormFragment.php";
 use Respect\Validation\Validator as v;
 use Zend\Db\Sql\Where;
 
-class Pages extends PageBase {
+class Modify extends PageBase {
 
 	private $_user;
 

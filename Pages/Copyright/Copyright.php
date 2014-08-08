@@ -1,5 +1,5 @@
 <?php
-class Pages  extends PageBase{
+class Copyright  extends PageBase{
 function HeaderContent()
 {
 

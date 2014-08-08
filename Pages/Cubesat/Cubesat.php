@@ -8,7 +8,7 @@ require ROOT . "/HtmlFragments/HtmlSearchFragment.php";
 require ROOT . "/HtmlFragments/HtmlPaginationFragment.php";
 
 use Zend\Db\Sql\Where;
-class Pages extends PageBase {
+class Cubesat extends PageBase {
 
 	private $_htmlTableFragment;
 	private $_satelliteTable;

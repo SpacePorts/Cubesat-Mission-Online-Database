@@ -9,7 +9,7 @@ require ROOT . "/HtmlFragments/HtmlSearchFragment.php";
 require ROOT . "/HtmlFragments/HtmlPaginationFragment.php";
 
 use Zend\Db\Sql\Where;
-class Pages extends PageBase {
+class Mission extends PageBase {
 	private $_user;
 
 

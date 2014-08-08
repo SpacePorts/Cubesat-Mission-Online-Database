@@ -6,7 +6,7 @@ require ROOT . "/HtmlFragments/HtmlIframePanelFormListFormFragment.php";
 
 require_once ROOT . "/Database/UserTable.php";
 
-class Pages extends PageBase {
+class Modify extends PageBase {
 	private $_user;
 
 	private $_partTable;

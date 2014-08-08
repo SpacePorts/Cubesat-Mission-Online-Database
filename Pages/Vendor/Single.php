@@ -1,7 +1,7 @@
 <?php
 require ROOT . "/Database/VendorTable.php";
 
-class Pages extends PageBase {
+class Single extends PageBase {
 	private $_vendorTable;
 
 	function __construct() {

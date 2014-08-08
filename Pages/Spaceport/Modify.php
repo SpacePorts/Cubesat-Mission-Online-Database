@@ -4,7 +4,7 @@ require ROOT . "/HtmlFragments/HtmlFormFragment.php";
 
 require_once ROOT . "/Database/UserTable.php";
 
-class Pages extends PageBase {
+class Modify extends PageBase {
 
 	private $_user;
 

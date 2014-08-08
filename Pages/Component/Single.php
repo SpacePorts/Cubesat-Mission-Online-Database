@@ -1,10 +1,8 @@
 <?php
 require_once ROOT . "/Database/PartTable.php";
 
-
-
 require ROOT . "/HtmlFragments/HtmlTableFragment.php";
-class Pages extends PageBase{
+class Single extends PageBase{
 	private $_partTable;
 	private $_part;
 	private $_htmlTableFragment;
@@ -35,8 +33,8 @@ class Pages extends PageBase{
 		for($x = 0; $x < count($partVendor); $x++)
 		{
 			$this->_htmlTableFragment->AddBodyRow(array(
-				"<a href='" . SITE_URL . "?page-id=Component-Single-PartVendor&part_vendor_id=".$partVendor[$x]->GetId()."'>" .$partVendor[$x]->GetCatalogEntry() . "</a>",
-				"<a href='" . SITE_URL . "?page-id=Component-Single-PartVendor&part_vendor_id=".$partVendor[$x]->GetId()."'>" .$partVendor[$x]->GetModelNumber() . "</a>"
+				"<a href='" . SITE_URL . "?page-id=Component-PartVendor-Single&part_vendor_id=".$partVendor[$x]->GetId()."'>" .$partVendor[$x]->GetCatalogEntry() . "</a>",
+				"<a href='" . SITE_URL . "?page-id=Component-PartVendor-Single&part_vendor_id=".$partVendor[$x]->GetId()."'>" .$partVendor[$x]->GetModelNumber() . "</a>"
 			));
 
 		}

@@ -8,7 +8,7 @@ require ROOT . "/HtmlFragments/HtmlPaginationFragment.php";
 
 use Zend\Db\Sql\Where;
 
-class Pages extends PageBase {
+class Component extends PageBase {
 	private $_partTable;
 	private $_htmlTableFragment;
 
