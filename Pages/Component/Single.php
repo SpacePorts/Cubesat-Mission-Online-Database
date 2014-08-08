@@ -44,7 +44,7 @@ class Single extends PageBase{
 		<h2>Description:</h2>
 		<?php echo $this->_part->GetDescription(); ?>
 		<h2>Models:</h2>
-		<a href="<?php echo SITE_URL . "?page-id=Component-Modify-PartVendor&component_id=".Get("component_id"); ?>">Add Model</a>
+		<a href="<?php echo SITE_URL . "?page-id=Component-PartVendor-Modify&component_id=".Get("component_id"); ?>">Add Model</a>
 		<?php $this->_htmlTableFragment->Output(); ?>
 
 
