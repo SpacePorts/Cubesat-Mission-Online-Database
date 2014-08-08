@@ -2,6 +2,10 @@
 require_once "PartTable.php";
 require_once "VendorTable.php";
 
+
+use Zend\Db\Sql\Sql;
+use Zend\Db\ResultSet\ResultSet;
+
 class PartVendorRow extends Row
 {
 	private $_vendorTable;
@@ -36,9 +40,20 @@ class PartVendorRow extends Row
 		return $this->_partTable->GetRowById($this->_partId);
 	}
 
+	public function SetPart($part)
+	{
+
+		$this->_partId = $part->GetId();
+	}
+
 	public function GetVendor()
 	{
 		return $this->_vendorTable->GetRowById($this->_vendorId);
+	}
+
+	public function SetVendor($vendor)
+	{
+		$this->_vendorId = $vendor->GetId();
 	}
 
 	public function GetModelNumber()
@@ -46,10 +61,34 @@ class PartVendorRow extends Row
 		return $this->_modelNumber;
 	}
 
+	public function SetModelNumber($number)
+	{
+		$this->_modelNumber = $number;
+	}
 	public function GetCatalogEntry()
 	{
 		return $this->_catalogEntry;
 	}
+	public function SetCatalogEntry($entry)
+	{
+		$this->_catalogEntry = $entry;
+	}
+
+	public function Update()
+	{
+		$sql = new Sql($this->_adapter,"relation_part_vendor");
+		$lupdate = $sql->update();
+		$lupdate->set(array(
+			"part_id" => $this->_partId,
+			"vendor_catalog_entry" => $this->_catalogEntry,
+			"vendor_id" => $this->_vendorId,
+			"vendor_model_number" => $this->_modelNumber));
+		$lupdate->Where(array("relation_part_id" => $this->_id));
+
+		$sql->prepareStatementForSqlObject($lupdate)->execute();
+	}
+
+
 }
 
 ?>

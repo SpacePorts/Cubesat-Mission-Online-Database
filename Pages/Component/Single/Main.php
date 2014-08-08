@@ -35,8 +35,8 @@ class Pages {
 		for($x = 0; $x < count($partVendor); $x++)
 		{
 			$this->_htmlTableFragment->AddBodyRow(array(
-				"<a href='" . SITE_URL . "page-id=Component-Modify-PartVendor&part_vendor_id=".$partVendor[$x]->GetId()."'>" .$partVendor[$x]->GetVendor() . "</a>",
-				"<a href='" . SITE_URL . "page-id=Component-Modify-PartVendor&part_vendor_id=".$partVendor[$x]->GetId()."'>" .$partVendor[$x]->GetModelNumber() . "</a>"
+				"<a href='" . SITE_URL . "?page-id=Component-Single-PartVendor&part_vendor_id=".$partVendor[$x]->GetId()."'>" .$partVendor[$x]->GetCatalogEntry() . "</a>",
+				"<a href='" . SITE_URL . "?page-id=Component-Single-PartVendor&part_vendor_id=".$partVendor[$x]->GetId()."'>" .$partVendor[$x]->GetModelNumber() . "</a>"
 			));
 
 		}
@@ -46,7 +46,7 @@ class Pages {
 		<h2>Description:</h2>
 		<?php echo $this->_part->GetDescription(); ?>
 		<h2>Models:</h2>
-		<a href="<?php echo SITE_URL . "?page-id=Component-Modify-PartVendor"; ?>">Add Model</a>
+		<a href="<?php echo SITE_URL . "?page-id=Component-Modify-PartVendor&component_id=".Get("component_id"); ?>">Add Model</a>
 		<?php $this->_htmlTableFragment->Output(); ?>
 
 

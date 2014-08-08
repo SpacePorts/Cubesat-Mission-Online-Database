@@ -32,9 +32,11 @@ class VendorTable extends Table
       $lselect->where($where);
 
       if($numerOfEntires != -1)
-      $lselect->limit($numerOfEntires); 
+      {
+         $lselect->limit($numerOfEntires); 
+         $lselect->offset($page * $numerOfEntires); 
+      }
 
-      $lselect->offset($page * $numerOfEntires); 
 
       $lresults = $sql->prepareStatementForSqlObject($lselect)->execute();
       

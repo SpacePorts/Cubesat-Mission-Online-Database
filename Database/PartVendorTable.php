@@ -18,7 +18,7 @@ class PartVendorTable extends Table
    {
       $sql = new Sql($this->_adapter,"relation_part_vendor");
       $lselect = $sql->Select();
-      $lselect->where(array("relation_part_id"=>$partId));
+      $lselect->where(array("relation_part_id"=>$id));
 
       $lresults = $sql->prepareStatementForSqlObject($lselect)->execute();
       
