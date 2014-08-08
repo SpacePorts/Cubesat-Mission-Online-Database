@@ -1,6 +1,6 @@
 <?php
 
-class Pages extends PageBase {
+class Team extends PageBase {
 
 
 	function __construct() {
