@@ -51,7 +51,7 @@
 	 			<?php  if($pageHandle->GetPage()->IsUserLegal()): ?>
 	 				<?php $pageHandle->GetPage()->BodyContent(); ?>
 	 			<?php else: ?>
-	 				<h1>Access Denied</h1>
+	 				<h1>Please Login to the correct account to view this page</h1>
 	 			<?php endif; ?>
 	 		</div>
 	 	</div >

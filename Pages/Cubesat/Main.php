@@ -40,9 +40,10 @@ class Pages extends PageBase {
 		$this->_statusSelect->AddOption("de-orbited","de orbited");
 		$this->_statusSelect->AddOption("entry-closed","entry closed");
 
-		$this->_search->AddSearchOption("sat-tle","Tle");
+
 		$this->_search->AddSearchOption("sat-name","Name");
 		$this->_search->AddSearchOption("sat-orbit","Orbit");
+		$this->_search->AddSearchOption("sat-tle","TLE");
 	}
 		
 	function HeaderContent()
