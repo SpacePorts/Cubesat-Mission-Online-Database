@@ -74,8 +74,6 @@ class SatelliteTable extends Table
 
    public function AddSatellite($name,$content,$tle,$orbit,$wiki,$status){
 
-      $sqlInsert = new SqlInsert("satellite",$this->_db);
-
       if(SatelliteRow::IsStatusLegal($status))
       {
         $sqlInsert->AddPair("status", $status);
@@ -86,15 +84,20 @@ class SatelliteTable extends Table
           return 0;
       }
 
-      $sqlInsert->AddPair("name", $name);
-      $sqlInsert->AddPair("content", $content);
-      $sqlInsert->AddPair("wiki", $wiki);
-      $sqlInsert->AddPair("tle", $tle);
-      $sqlInsert->AddPair("orbit", $orbit);
 
-      $sqlInsert->Execute();
+      $sql = new Sql($this->_adapter,"satellite");
+      $linsert = $sql->insert();
+      $linsert->values(array(
+       'name' => $name,
+       'content' => $content,
+       'wiki' => $wiki,
+       'tle' => $tle,
+       'orbit' => $orbit
+      ));
 
-       return $this->GetRowById($this->_db->lastInsertId());
+      $lresults =  $sql->prepareStatementForSqlObject($linsert)->execute();
+
+      return $this->GetRowById($this->_adapter->getDriver()->getLastGeneratedValue());
    }
 
 }

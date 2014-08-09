@@ -1,5 +1,7 @@
 <?php
 require_once "Database.php";
+
+use Zend\Db\Sql\Sql;
 class VendorRow extends Row
 {
 	private $_id;
@@ -63,13 +65,16 @@ class VendorRow extends Row
 
 	public function Update()
 	{
-		$lsqlUpdate = new SqlUpdate("vendor",$this->_db);
-		$lsqlUpdate->Where()->EqualTo("vendor_id",$this->_id);
-		$lsqlUpdate->AddPair("name",$this->_name);
-		$lsqlUpdate->AddPair("url",$this->_url);
-		$lsqlUpdate->AddPair("contact_info",$this->_contact_info);
-		$lsqlUpdate->AddPair("type",$this->_type);
-		$lsqlUpdate->Execute();
+		$sql = new Sql($this->_adapter,"vendor");
+		$lupdate = $sql->update();
+		$lupdate->set(array(
+			"name" => $this->_name,
+			"url" => $this->_url,
+			"contact_info" => $this->_contact_info,
+			"type" => $this->_type));
+		$lupdate->Where(array("vendor_id" => $this->_id));
+
+		$sql->prepareStatementForSqlObject($lupdate)->execute();
 	}
 
 }

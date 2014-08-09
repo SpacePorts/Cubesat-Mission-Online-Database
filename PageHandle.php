@@ -7,12 +7,12 @@ class PageHandle
 	private $_explodedPage = array();
 	private $_PageId;
 
-	function __construct() {
-		if(empty($_GET["page-id"]))
-			$_GET["page-id"] = "Home";
+	function __construct($page) {
+		if(empty($page))
+			$page = "Home";
 
 		//sanatizes the page-id
-		$lsanatize = preg_replace('/[^A-Za-z0-9\-]/', '', $_GET["page-id"]);
+		$lsanatize = preg_replace('/[^A-Za-z0-9\-]/', '', $page);
 		$this->_explodedPage = explode("-", $lsanatize);
 		$this->_PageId =  $lsanatize;
 	

@@ -1,5 +1,8 @@
 <?php 
 require_once "Database.php";
+
+use Zend\Db\Sql\Sql;
+
 class SpaceportRow extends Row
 {
 	private $_id;
@@ -79,14 +82,18 @@ class SpaceportRow extends Row
 
 	public function Update()
 	{
-		$lsqlUpdate = new SqlUpdate("spaceport",$this->_db);
-		$lsqlUpdate->Where()->EqualTo("spaceport_id",$this->_id);
-		$lsqlUpdate->AddPair("name",$this->_name);
-		$lsqlUpdate->AddPair("latlong",$this->_latLong);
-		$lsqlUpdate->AddPair("url",$this->_url);
-		$lsqlUpdate->AddPair("description",$this->_description);
-		$lsqlUpdate->AddPair("url_googlemap",$this->_googleMapUrl);
-		$lsqlUpdate->Execute();
+
+		$sql = new Sql($this->_adapter,"spaceport");
+		$lupdate = $sql->update();
+		$lupdate->set(array(
+			"name" => $this->_name,
+			"latlong" => $this->_latLong,
+			"url" => $this->_url,
+			"description"=>$this->_description,
+			"url_googlemap"=>$this->_googleMapUrl));
+		$lupdate->Where(array("spaceport_id" => $this->_id));
+
+		$sql->prepareStatementForSqlObject($lupdate)->execute();
 	}
 
 }

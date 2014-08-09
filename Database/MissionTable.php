@@ -15,13 +15,20 @@ class MissionTable extends Table
 
    public function GetRowById($id)
    {
-   	  $sqlSelect = new SqlSelect("mission",$this->_db);
-   	  $sqlSelect->Where()->EqualTo("mission_id",$id);
+     $sql = new Sql($this->_adapter,"mission");
 
-   	  $stmt =  $sqlSelect->Execute();
-      while ($row = $stmt->fetch()) {
+      $lselect = $sql->Select();
+      $lselect->Where(array("mission_id"=>$id));
+
+      $lresults = $sql->prepareStatementForSqlObject($lselect)->execute();
+
+      $resultSet = new ResultSet;
+      $resultSet->initialize($lresults);
+
+      foreach ($resultSet as $row) {
         return new MissionRow($row);
       }
+
    }
 
    public function Find($page,$numerOfEntires,$where)

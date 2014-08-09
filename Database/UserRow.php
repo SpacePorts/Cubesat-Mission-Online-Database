@@ -33,7 +33,6 @@ class UserRow extends Row
 		if(isset($_SESSION["user"]))
 		{
 			$luser =  unserialize($_SESSION["user"]);
-			$luser->Connect();
 			return $luser;
 		}
 	}

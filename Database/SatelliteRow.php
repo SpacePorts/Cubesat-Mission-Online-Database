@@ -115,15 +115,18 @@ class SatelliteRow extends Row
 
 	public function Update()
 	{
-		$sqlUpdate = new SqlUpdate("satellite",$this->_db);
-		$sqlUpdate->Where()->EqualTo("sat_id",$this->_id);
-		$sqlUpdate->AddPair("name",$this->_name);
-		$sqlUpdate->AddPair("content",$this->_content);
-		$sqlUpdate->AddPair("wiki",$this->_wiki);
-		$sqlUpdate->AddPair("status",$this->_status);
-		$sqlUpdate->AddPair("tle",$this->_tle);
-		$sqlUpdate->AddPair("orbit",$this->_orbit);
-		$sqlUpdate->Execute();
+		$sql = new Sql($this->_adapter,"satellite");
+		$lupdate = $sql->update();
+		$lupdate->set(array(
+			"name" => $this->_name,
+			"content" => $this->_content,
+			"wiki" => $this->_wiki,
+			"status"=>$this->_status,
+			"tle"=>$this->_tle,
+			"orbit"=>$this->_orbit));
+		$lupdate->Where(array("sat_id" => $this->_id));
+
+		$sql->prepareStatementForSqlObject($lupdate)->execute();
 	}
 
 	public function AddParts($parts)

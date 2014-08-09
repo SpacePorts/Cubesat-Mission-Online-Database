@@ -14,12 +14,20 @@ class SpaceportTable extends Table
 
    public function GetRowById($id)
    {
-		$lsqlSelect = new SqlSelect("spaceport",$this->_db);
-		$lsqlSelect->Where()->EqualTo("spaceport_id",$id);
-		$results =  $lsqlSelect->Execute();
-		while ($row = $results->fetch()) {
-			return new SpaceportRow($row);
-		}
+
+      $sql = new Sql($this->_adapter,"spaceport");
+
+      $lselect = $sql->Select();
+      $lselect->Where(array("spaceport_id"=>$id));
+
+      $lresults = $sql->prepareStatementForSqlObject($lselect)->execute();
+
+      $resultSet = new ResultSet;
+      $resultSet->initialize($lresults);
+
+      foreach ($resultSet as $row) {
+        return new SpaceportRow($row);
+      }
 
    }
 
@@ -68,16 +76,20 @@ class SpaceportTable extends Table
 
    public function AddSpaceport($name,$latlong,$url,$description,$url_googlemap)
    {
-  	 	$lsqlInsert = new SqlInsert("spaceport",$this->_db);
-   	 	$lsqlInsert->AddPair("name",$name);
-   	 	$lsqlInsert->AddPair("latlong",$latlong);
-   	 	$lsqlInsert->AddPair("url",$url);
-   	 	$lsqlInsert->AddPair("description",$description);
-   	 	$lsqlInsert->AddPair("url_googlemap",$url_googlemap);
-   	 	
-   	 	$lsqlInsert->Execute();
 
-     	return $this->GetRowById($this->_db->lastInsertId());
+      $sql = new Sql($this->_adapter,"spaceport");
+      $linsert = $sql->insert();
+      $linsert->values(array(
+       'name' => $name,
+       'latlong' => $latlong,
+       'url' => $url,
+       'description' => $description,
+       'url_googlemap' => $url_googlemap
+      ));
+
+      $lresults =  $sql->prepareStatementForSqlObject($linsert)->execute();
+
+      return $this->GetRowById($this->_adapter->getDriver()->getLastGeneratedValue());
    }
 
 

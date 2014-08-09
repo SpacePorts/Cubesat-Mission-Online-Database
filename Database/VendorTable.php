@@ -14,14 +14,21 @@ class VendorTable extends Table
 
    function GetRowById($id)
    {
-      $lsqlSelect = new SqlSelect("vendor",$this->_db);
-      $lsqlSelect->Where()->EqualTo("vendor_id",$id);
+      $sql = new Sql($this->_adapter,"vendor");
+      $lselect = $sql->Select();
+      $lselect->where(array("vendor_id"=>$id));
 
-      $lresults = $lsqlSelect->Execute();
+      $lresults = $sql->prepareStatementForSqlObject($lselect)->execute();
+      
+      $resultSet = new ResultSet;
+      $resultSet->initialize($lresults);
 
-      while ($row = $lresults->fetch()) {
-         return new VendorRow($row);
+  
+      foreach ($resultSet as $row) {
+
+        return new VendorRow($row);
       }
+
    }
 
    function Find($page,$numerOfEntires,$where)
@@ -72,16 +79,19 @@ class VendorTable extends Table
 
    function AddVendor($name,$url,$contact_info,$type)
    {
-      $lsqlInsert = new SqlInsert("vendor",$this->_db);
 
-      $lsqlInsert->AddPair("name", $name);
-      $lsqlInsert->AddPair("url", $url);
-      $lsqlInsert->AddPair("contact_info", $contact_info);
-      $lsqlInsert->AddPair("type", $type);
+      $sql = new Sql($this->_adapter,"vendor");
+      $linsert = $sql->insert();
+      $linsert->values(array(
+       'name' => $name,
+       'url' => $url,
+       'contact_info' => $contact_info,
+       'type' => $type
+      ));
 
-      $lsqlInsert->Execute();
+      $lresults =  $sql->prepareStatementForSqlObject($linsert)->execute();
 
-      return $this->GetRowById($this->_db->lastInsertId());
+      return $this->GetRowById($this->_adapter->getDriver()->getLastGeneratedValue());
 
    }
 

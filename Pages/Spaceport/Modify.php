@@ -63,20 +63,27 @@ class Modify extends PageBase {
 		{
 			if(isset($_POST["spaceport_id"]))
 			{
-				$lspacePort = $this->_spaceportTable->GetRowById($_POST["spaceport_id"]);
-				$lspacePort->SetName($_POST["spaceport_name"]);
-				$lspacePort->SetLatLong($_POST["vendor_url"]);
-				$lspacePort->SetUrl($_POST["vendor_contactInfo"]);
-				$lspacePort->SetDescription($_POST["vendor_type"]);
-				$lspacePort->setGoogleMapUrl($_POST["vendor_type"]);
-				$lspacePort->Update();
+				$this->_spacePort= $this->_spaceportTable->GetRowById($_POST["spaceport_id"]);
+				$this->_spacePort->SetName($_POST["spaceport_name"]);
+				$this->_spacePort->SetLatLong($_POST["spaceport_latlong"]);
+				$this->_spacePort->SetUrl($_POST["spaceport_url"]);
+				$this->_spacePort->SetDescription($_POST["spaceport_description"]);
+				$this->_spacePort->setGoogleMapUrl($_POST["spaceport_url_googlemap"]);
+				$this->_spacePort->Update();
 			}	
 			else
 			{
 				
-				$this->_spaceportTable->AddSpaceport($_POST["spaceport_name"],$_POST["spaceport_latlong"],$_POST["spaceport_url"],$_POST["spaceport_description"],$_POST["spaceport_url_googlemap"]);
+				$this->_spacePort = $this->_spaceportTable->AddSpaceport($_POST["spaceport_name"],$_POST["spaceport_latlong"],$_POST["spaceport_url"],$_POST["spaceport_description"],$_POST["spaceport_url_googlemap"]);
 				
 			}
+
+
+			if(Post("single") == "single")
+				$output["redirect"] = SITE_URL . "?page-id=Spaceport-Modify&spaceport_id=".$this->_spacePort->GetId() . "&single=single";
+			else
+				$output["redirect"] = SITE_URL . "?page-id=Spaceport-Modify&spaceport_id=".$this->_spacePort->GetId();
+			
 		}
 		
 	}
@@ -88,7 +95,7 @@ class Modify extends PageBase {
 
 		if(isset($this->_spacePort))
 		{
-			$this->_form->AddHiddenInput("sat_id",$this->_spacePort->GetId());
+			$this->_form->AddHiddenInput("spaceport_id",$this->_spacePort->GetId());
 			$this->_form->AddTextInput("spaceport_name","Name:*",$this->_spacePort->GetName());
 			$this->_form->AddTextInput("spaceport_latlong","Latlong:*",$this->_spacePort->GetLatLong());
 			$this->_form->AddTextInput("spaceport_url","Url:*",$this->_spacePort->GetUrl());

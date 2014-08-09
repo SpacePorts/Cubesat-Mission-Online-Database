@@ -29,6 +29,10 @@ class Single extends PageBase
 	public function BodyContent()
 	{
 		?>
+		<?php  if(Get("single") != "single") : ?>
+		<a href="<?php echo SITE_URL; ?>?page-id=Spaceport-Modify&spaceport_id=<?php echo $this->_spaceport->GetId();?>">Modify</a>
+		<?php endif; ?>
+
 		<h1><?php echo $this->_spaceport->GetName(); ?></h1>
 		<h2>Lat Long</h2>
 		<?php echo $this->_spaceport->GetLatLong(); ?>

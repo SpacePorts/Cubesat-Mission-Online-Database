@@ -14,12 +14,21 @@ class PartTable extends Table
 
    public function GetRowById($id)
    {
-      $sqlSelect = new SqlSelect("part",$this->_db);
-      $sqlSelect->Where()->EqualTo("part_id",$id);
-      $stmt =  $sqlSelect->Execute();
-      while ($row = $stmt->fetch()) {
+
+      $sql = new Sql($this->_adapter,"part");
+
+      $lselect = $sql->Select();
+      $lselect->Where(array("part_id"=>$id));
+
+      $lresults = $sql->prepareStatementForSqlObject($lselect)->execute();
+
+      $resultSet = new ResultSet;
+      $resultSet->initialize($lresults);
+
+      foreach ($resultSet as $row) {
         return new PartRow($row);
       }
+
    }
 
    function Find($page,$numerOfEntires,$where)
@@ -65,12 +74,16 @@ class PartTable extends Table
    }
    public function AddPart($description,$formal_specification)
    {
-     $lsqlInsert = new SqlInsert("part",$this->_db);
-     $lsqlInsert->AddPair("description",$description);
-     $lsqlInsert->AddPair("formal_specification",$formal_specification);
-     $lsqlInsert->Execute();
-     
-      return $this->GetRowById($this->_db->lastInsertId());
+      $sql = new Sql($this->_adapter,"part");
+      $linsert = $sql->insert();
+      $linsert->values(array(
+         'description' => $description,
+         'formal_specification' => $formal_specification
+      ));
+
+      $lresults =  $sql->prepareStatementForSqlObject($linsert)->execute();
+
+      return $this->GetRowById($this->_adapter->getDriver()->getLastGeneratedValue());
 
    }
 

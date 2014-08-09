@@ -2,6 +2,8 @@
 require_once "Database.php";
 require_once "PartVendorTable.php";
 
+use Zend\Db\Sql\Sql;
+
 class PartRow extends Row
 {
 	private $_id;
@@ -28,7 +30,7 @@ class PartRow extends Row
 	}
 
 	public function SetDescription($description){
-	$this->_description = $description;
+		$this->_description = $description;
 	}
 
 	public function GetFormalSpecification(){
@@ -42,11 +44,15 @@ class PartRow extends Row
 
 	public function Update()
 	{
-		$lsqlUpdate = new SqlUpdate("part",$this->_db);
-		$lsqlUpdate->Where()->EqualTo("part_id",$this->_id);
-		$lsqlUpdate->AddPair("description",$this->_description);
-		$lsqlUpdate->AddPair("formal_specification",$this->_formalSpecification);
-		$lsqlUpdate->Execute();
+
+		$sql = new Sql($this->_adapter,"part");
+		$lupdate = $sql->update();
+		$lupdate->set(array(
+			"description" =>$this->_description,
+			"formal_specification" => $this->_formalSpecification));
+		$lupdate->Where(array("part_id" => $this->_id));
+
+		$sql->prepareStatementForSqlObject($lupdate)->execute();
 	}
 
 	

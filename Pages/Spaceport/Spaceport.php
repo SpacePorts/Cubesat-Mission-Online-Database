@@ -8,7 +8,7 @@ require ROOT . "/HtmlFragments/HtmlPaginationFragment.php";
 
 use Zend\Db\Sql\Where;
 
-class Pages extends PageBase {
+class Spaceport extends PageBase {
 
 	private $_htmlTableFragment;
 	private $_spaceportTable;
@@ -42,11 +42,7 @@ class Pages extends PageBase {
 
 	function BodyContent()
 	{
-	?>
-	<div class="center_container">
 
-	
-		<?php
 
 		$this->_searchForm->AddFragment("search","Search:",$this->_search);
 		$this->_searchForm->AddHiddenInput("page-id", $this->GetPageID());
@@ -57,7 +53,8 @@ class Pages extends PageBase {
 		if(Get("search") != "")
 		$lwhere->Like("name", "%" . Get("search") . "%");
 
-		$Spaceport = $this->_spaceportTable->Find(0,10,$lwhere);
+		$Spaceport = $this->_spaceportTable->Find($this->_pagination->GetPage(),10,$lwhere);
+		$this->_pagination->CalculatePageMax($this->_spaceportTable->FindCount($lwhere),20);
 
 		?> 	<a href="<?php echo PAGE_GET_URL . "-Modify"; ?>">Add Spaceport</a> <?php
 		$this->_htmlTableFragment->AddHeadRow(array("Name","URL","Google Map"));
@@ -71,11 +68,8 @@ class Pages extends PageBase {
 
 		}
 		$this->_htmlTableFragment->Output();
+		$this->_pagination->Output();
 
-		?>
-
-		</div>
-		<?php
 	}
 
 }

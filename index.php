@@ -10,7 +10,7 @@
 
 	if(!isset($_GET["page-id"]))
 		$_GET["page-id"] ="";
-	$pageHandle = new PageHandle();
+	$pageHandle = new PageHandle($_GET["page-id"]);
 
 ?>
 
