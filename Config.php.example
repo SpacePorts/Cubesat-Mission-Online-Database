@@ -27,6 +27,7 @@ define("DB_NAME","cubesat");
 define("IMAGE_DIRECTORY", ROOT . "/Upload/");
 define("IMAGE_URL", SITE_URL .  "/Upload/");
 
+define("CONTACT_MAIL","test@test.com");
 
 date_default_timezone_set("UTC");
 

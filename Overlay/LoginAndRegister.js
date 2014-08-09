@@ -39,23 +39,6 @@ $('html').click(function(e) {
 
 
 
-function LoginActive()
-{
-	$("#SignUpForm").hide();
-	$("#LoginForm").show();
-
-	$("#Login").css({background:"#424242"});
-	$("#Registration").css({background:"none"});
-}
-function RegisterActive()
-{
-	$("#SignUpForm").show();
-	$("#LoginForm").hide();
-
-	$("#Registration").css({background:"#424242"});
-	$("#Login").css({background:"none"});
-}
-
 function LoginAjax()
 {
 	$.post(SITE_URL + "Overlay/AjaxLogin.php",{

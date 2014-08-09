@@ -32,13 +32,9 @@ $registerForm->AddSubmitButton("Sign Up");
 
 <div id="overlay" style="display:none;"></div>
 <div id="login_form_container" style="display:none;">
-	<div class="selection_login_form">
-		<a id="login_form_select" href="#">Login</a>
-		<a id="signup_form_select" href="#" class="unselected">Sign Up</a>
-	</div>
-
+<h1>Login</h1>
 	<?php $loginForm->Output();?>
-	<?php $registerForm->Output(); ?>
+	do you have an account? <a href="<?php echo SITE_URL. "?page-id=Register" ?>">Register</a>
 </div>
 
 
