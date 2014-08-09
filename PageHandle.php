@@ -60,8 +60,12 @@ class PageHandle
 	
 	public function GetPage()
 	{
-
 		return $this->_page;
+	}
+
+	public function VerifyPageAccess()
+	{
+		return $this->_page->IsUserLegal();
 	}
 }
 
