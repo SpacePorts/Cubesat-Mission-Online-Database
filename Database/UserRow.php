@@ -39,7 +39,6 @@ class UserRow extends Row
 
 	public function StoreInSession()
 	{
-		$this->DisConnect();
 		$_SESSION["user"] = serialize($this);
 	}
 
