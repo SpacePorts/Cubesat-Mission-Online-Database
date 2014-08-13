@@ -38,6 +38,15 @@ class Single extends PageBase
 		<?php echo $this->_spaceport->GetLatLong(); ?>
 		<h2>Description:</h2>
 		<?php echo $this->_spaceport->GetDescription(); ?>
+		<h2>Address:</h2>
+		<address>
+			<?php echo $this->_spaceport->GetAddressOne(); ?></br>
+			<?php if($this->_spaceport->GetAddressTwo() != ""): ?>
+			<?php echo $this->_spaceport->GetAddressTwo(); ?></br>
+			<?php endif; ?>
+			<?php echo $this->_spaceport->GetCity(); ?>,<?php echo $this->_spaceport->GetZip(); ?></br>
+			<?php echo $this->_spaceport->GetCountry(); ?>
+		</address>
 		<?php
 	}
 }

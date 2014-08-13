@@ -9,7 +9,7 @@ class HtmlFormFragment
 	private $_ids;
 	private $_submitButton;
 	private $_method;
-	function __construct($url,$method = "POST",$ids = "",$classes = "basic_form default_form_process")
+	function __construct($url ="",$method = "POST",$ids = "",$classes = "basic_form default_form_process")
 	{
 		$this->_method = $method;
 		$this->_url = $url;
@@ -25,7 +25,7 @@ class HtmlFormFragment
 
 	public function AddTextInput($name,$labelName,$value="")
 	{
-		array_push($this->_inputs, array("name" => $name,"label" => $labelName, "output" => "<input class='form-control' type='text' name='".$name."' value='".$value."'/>"));
+		array_push($this->_inputs, array("name" => $name,"label" => $labelName, "output" => "<input class='form-control input-sm'  type='text' name='".$name."' value='".$value."'/>"));
 	}
 
 	public function AddUploadButton($name,$labelName,$value="")
@@ -41,13 +41,16 @@ class HtmlFormFragment
 
 	public function AddTextarea($name,$labelName,$value="")
 	{
-		array_push($this->_inputs, array("name" => $name,"label" => $labelName, "output" => "</br><textarea type='text' class='form-control' rows='3' name='".$name."' >".$value."</textarea>"));
+		array_push($this->_inputs, array("name" => $name,"label" => $labelName, "output" => "</br><textarea type='text' class='form-control ' rows='3' name='".$name."' >".$value."</textarea>"));
 	}
 
 	public function AddInput($name,$labelName,$value)
 	{
 		array_push($this->_inputs, array("name" => $name,"label" => $labelName, "output" => $value));
 	}
+
+
+
 
 	public function AddFragment($name,$labelName,$value)
 	{
@@ -70,10 +73,12 @@ class HtmlFormFragment
 	}
 
 
-	public function Output()
+	public function Output($disableFormwrap = false)
 	{
 		?>
+		<?php if($disableFormwrap == false): ?>
 			<form id="<?php echo $this->_ids; ?>" method="<?php echo $this->_method ?>" action="<?php echo $this->_url;?>" class="<?php echo $this->_classes; ?>" enctype="multipart/form-data">
+		<?php endif; ?>
 
 			<?php for($x =0; $x < count($this->_hiddenInput);$x++) : ?>
 				<?php echo $this->_hiddenInput[$x]; ?>
@@ -93,9 +98,9 @@ class HtmlFormFragment
 						<?php
 						if(isset($this->_inputs[$x]["output"]))
 							 echo $this->_inputs[$x]["output"];
-						else
+						else 
 							$this->_inputs[$x]["fragment"]->Output();
-
+		
 						 ?>
 					</div>
 				<?php }?>
@@ -104,7 +109,9 @@ class HtmlFormFragment
 			<div  class="form-group">
 			<?php if(isset($this->_submitButton)) echo $this->_submitButton;  ?>
 			</div>
-			</form>
+			<?php if($disableFormwrap == false): ?>
+				</form>
+			<?php endif; ?>
 		<?php
 
 	}

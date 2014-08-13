@@ -74,7 +74,7 @@ class SpaceportTable extends Table
       }
    }
 
-   public function AddSpaceport($name,$latlong,$url,$description,$url_googlemap)
+   public function AddSpaceport($name,$latlong,$url,$description,$url_googlemap,$address1,$address2,$state,$country,$city,$zip)
    {
 
       $sql = new Sql($this->_adapter,"spaceport");
@@ -84,7 +84,13 @@ class SpaceportTable extends Table
        'latlong' => $latlong,
        'url' => $url,
        'description' => $description,
-       'url_googlemap' => $url_googlemap
+       'url_googlemap' => $url_googlemap,
+       "address1"=>$address1,
+       "address2"=>$address2,
+       "state" =>$state,
+       "country"=>$country,
+       "city"=>$city,
+       "zip"=>$zip
       ));
 
       $lresults =  $sql->prepareStatementForSqlObject($linsert)->execute();
