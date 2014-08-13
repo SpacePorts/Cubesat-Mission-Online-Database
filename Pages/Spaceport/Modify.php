@@ -71,7 +71,7 @@ class Modify extends PageBase {
 			$error->AddErrorPair("city","City Required");
 
 		if(!v::string()->notEmpty()->validate(Post("address_1")))
-			$error->AddErrorPair("address_1","Adress 1 Required");
+			$error->AddErrorPair("address_1","Address 1 Required");
 
 		if(!v::string()->notEmpty()->validate(Post("zip")))
 			$error->AddErrorPair("zip","Zip Required");
