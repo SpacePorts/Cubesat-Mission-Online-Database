@@ -4,12 +4,28 @@ require_once "UserRow.php";
 
 use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
-
+use Zend\Db\Sql\Ddl\Column;
 class UserTable extends Table
 {
 
    function __construct() {
        parent::__construct();
+   }
+
+  public function GetTable(){
+    return "user";
+   }
+
+   public function GetColumnStructure()
+   {
+    $userId = new Column\Integer("user_id");
+    $userId->setOption('auto_increment', true);
+    return array(
+      array("column"=>$userId,"constraints"=>array("PRIMARY KEY")),
+      array("column"=>new Column\Text("user_name")),
+      array("column"=>new Column\Text("password")),
+      array("column"=>new Column\Text("email")),
+      array("column"=>new Column\Text("type")));
    }
 
 

@@ -15,10 +15,6 @@ return array(
     'Zend\\Loader\\' => array($vendorDir . '/zendframework/zend-loader'),
     'Zend\\Db\\' => array($vendorDir . '/zendframework/zend-db'),
     'Zend\\Crypt\\' => array($vendorDir . '/zendframework/zend-crypt'),
-    'Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),
     'Respect\\Validation' => array($vendorDir . '/respect/validation/library'),
     'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src'),
-    'Illuminate\\Support' => array($vendorDir . '/illuminate/support'),
-    'Illuminate\\Filesystem' => array($vendorDir . '/illuminate/filesystem'),
-    'Illuminate\\Config' => array($vendorDir . '/illuminate/config'),
 );

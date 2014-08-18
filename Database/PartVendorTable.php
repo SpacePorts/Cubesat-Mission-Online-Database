@@ -7,12 +7,31 @@ require_once "PartRow.php";
 use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
 
+
+use Zend\Db\Sql\Ddl\Column;
+
 class PartVendorTable extends Table
 {
 
    function __construct() {
        parent::__construct();
    }
+
+  public function GetTable(){
+   return "relation_part_vendor";
+  }
+
+  public function GetColumnStructure()
+  {
+    $lrelationPartId = new Column\Integer("relation_part_id");
+    $lrelationPartId->setOption('auto_increment', true);
+    return array(
+    array("column"=>$lrelationPartId,"constraints"=>array("PRIMARY KEY")),
+    array("column"=>new Column\Integer("part_id")),
+   array("column"=>new Column\Integer("vendor_id")),
+   array("column"=>new Column\Text("vendor_catalog_entry")),
+    array("column"=>new Column\Text("vendor_model_number")));
+  }
 
   public function GetRowById($id)
    {

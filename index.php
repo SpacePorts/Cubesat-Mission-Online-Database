@@ -3,7 +3,7 @@
 
 
 	session_start();
-
+	require "Sats.php";
 	require "Config.php";
 	require "Library/Captcha.php";
 	require "PageHandle.php";
@@ -78,4 +78,5 @@
   <?php endif; ?>
 
  </html>
+
  

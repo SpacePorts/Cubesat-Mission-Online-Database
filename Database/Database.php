@@ -2,7 +2,6 @@
 
 class Table
 {
-
 	protected $_adapter;
 
 	function __construct() {
@@ -13,6 +12,16 @@ class Table
 		    'password' => USER_PASSWORD
 		 ));
 	}
+
+	public function GetTable(){
+
+	}
+
+	public function GetColumnStructure()
+	{
+
+	}
+
 
 
 }

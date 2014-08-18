@@ -29,4 +29,4 @@
 	</div>
 </div-->
 <address ><div id="CopyRight">&copy;Copyright SpacePorts.org</div>
-<div>Alpha 00.00.03</div></address>
+<div><?php echo VERSION; ?></div></address>

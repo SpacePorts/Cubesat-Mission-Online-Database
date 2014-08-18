@@ -4,12 +4,26 @@ require_once "TeamRow.php";
 
 use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
-
-class UserTable extends Table
+use Zend\Db\Sql\Ddl\Column;
+class TeamTable extends Table
 {
 
    function __construct() {
        parent::__construct();
+   }
+
+  public function GetTable(){
+    return "team";
+   }
+
+   public function GetColumnStructure()
+   {
+    $teamId = new Column\Integer("team_id");
+    $teamId->setOption('auto_increment', true);
+    return array(
+      array("column"=>$teamId,"constraints"=>array("PRIMARY KEY")),
+      array("column"=>new Column\Text("name")),
+      array("column"=>new Column\Text("latlong")));
    }
 
    public function GetRowById($id)

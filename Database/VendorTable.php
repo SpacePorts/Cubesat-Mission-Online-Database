@@ -4,12 +4,28 @@ require_once "VendorRow.php";
 
 use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
-
+use Zend\Db\Sql\Ddl\Column;
 class VendorTable extends Table
 {
 
    function __construct() {
        parent::__construct();
+   }
+
+  public function GetTable(){
+    return "vendor";
+   }
+
+   public function GetColumnStructure()
+   {
+    $vendorId = new Column\Integer("vendor_id");
+    $vendorId->setOption('auto_increment', true);
+    return array(
+      array("column"=>$vendorId,"constraints"=>array("PRIMARY KEY")),
+      array("column"=>new Column\Text("name")),
+      array("column"=>new Column\Text("url")),
+      array("column"=>new Column\Text("contact_info")),
+      array("column"=>new Column\Text("type")));
    }
 
    function GetRowById($id)

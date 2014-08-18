@@ -2,6 +2,9 @@
 require_once "Database.php";
 require_once "MissionRow.php";
 
+
+use Zend\Db\Sql\Ddl\Column;
+
 use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Adapter\Driver;
@@ -12,6 +15,25 @@ class MissionTable extends Table
    function __construct() {
        parent::__construct();
    }
+
+
+  public function GetTable(){
+    return "mission";
+  }
+
+  public function GetColumnStructure()
+  {
+    $lmissionID = new Column\Integer("mission_id");
+    $lmissionID->setOption('auto_increment', true);
+    return array(
+      array("column"=>$lmissionID,"constraints"=>array("PRIMARY KEY")),
+      array("column"=>new Column\Text("name")),
+      array("column"=>new Column\Text("objective")),
+      array("column"=>new Column\Text("wiki")),
+      array("column"=>new Column\Text("content")));
+  }
+
+
 
    public function GetRowById($id)
    {

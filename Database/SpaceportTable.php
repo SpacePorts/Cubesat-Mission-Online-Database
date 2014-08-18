@@ -4,12 +4,35 @@ require_once "SpaceportRow.php";
 
 use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
-
+use Zend\Db\Sql\Ddl\Column;
 class SpaceportTable extends Table
 {
 
    function __construct() {
        parent::__construct();
+   }
+
+   public function GetTable(){
+    return "spaceport";
+   }
+
+   public function GetColumnStructure()
+   {
+    $spaceportId = new Column\Integer("spaceport_id");
+    $spaceportId->setOption('auto_increment', true);
+    return array(
+      array("column"=>$spaceportId,"constraints"=>array("PRIMARY KEY")),
+      array("column"=>new Column\Text("latlong")),
+      array("column"=>new Column\Text("url")),
+      array("column"=>new Column\Text("description")),
+      array("column"=>new Column\Text("url_googlemap")),
+      array("column"=>new Column\Text("address1")),
+      array("column"=>new Column\Text("address2")),
+      array("column"=>new Column\Text("name")),
+      array("column"=>new Column\Text("state")),
+      array("column"=>new Column\Text("country")),
+      array("column"=>new Column\Text("city")),
+      array("column"=>new Column\Text("zip")));
    }
 
    public function GetRowById($id)

@@ -4,7 +4,8 @@
         "url": "https://packages.zendframework.com/"
     }],
 	"require": {
-        "zendframework/zend-db": "2.0.*",
+        "zendframework/zend-db": "2.3.*",
+
         "respect/validation": "0.6.1",
          "intervention/image": "2.*",
          "zendframework/zend-mail" : "2.*"

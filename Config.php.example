@@ -29,6 +29,8 @@ define("IMAGE_URL", SITE_URL .  "/Upload/");
 
 define("CONTACT_MAIL","test@test.com");
 
+define("DEVELOPER_MODE", true);
+
 date_default_timezone_set("UTC");
 
 ?>

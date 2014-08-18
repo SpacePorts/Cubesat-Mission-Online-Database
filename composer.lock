@@ -4,160 +4,24 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "90b720e4ba1b6ec88b7a487c013f9d9b",
+    "hash": "318745512caadfd83f186ff6e02f8cec",
     "packages": [
         {
-            "name": "illuminate/config",
-            "version": "v4.2.8",
-            "target-dir": "Illuminate/Config",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/illuminate/config.git",
-                "reference": "03de040d413800bd3c672a484202bc8b355b6f9b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/config/zipball/03de040d413800bd3c672a484202bc8b355b6f9b",
-                "reference": "03de040d413800bd3c672a484202bc8b355b6f9b",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/filesystem": "4.2.*",
-                "illuminate/support": "4.2.*",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Illuminate\\Config": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com"
-                }
-            ],
-            "time": "2014-07-15 11:11:21"
-        },
-        {
-            "name": "illuminate/filesystem",
-            "version": "v4.2.8",
-            "target-dir": "Illuminate/Filesystem",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/illuminate/filesystem.git",
-                "reference": "1e517251a924b5f90b1ed10966e38ff0798ddc24"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/filesystem/zipball/1e517251a924b5f90b1ed10966e38ff0798ddc24",
-                "reference": "1e517251a924b5f90b1ed10966e38ff0798ddc24",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "4.2.*",
-                "php": ">=5.4.0",
-                "symfony/finder": "2.5.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Illuminate\\Filesystem": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com"
-                }
-            ],
-            "time": "2014-08-01 20:11:25"
-        },
-        {
-            "name": "illuminate/support",
-            "version": "v4.2.8",
-            "target-dir": "Illuminate/Support",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/illuminate/support.git",
-                "reference": "8702d655da1f7502037a2206df38399656ff35ae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/8702d655da1f7502037a2206df38399656ff35ae",
-                "reference": "8702d655da1f7502037a2206df38399656ff35ae",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "jeremeamia/superclosure": "~1.0",
-                "patchwork/utf8": "1.1.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Illuminate\\Support": ""
-                },
-                "files": [
-                    "Illuminate/Support/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com"
-                }
-            ],
-            "time": "2014-08-05 12:08:34"
-        },
-        {
             "name": "intervention/image",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "fb679336b3e7af812d058bd250588ffff9608cc3"
+                "reference": "2fb5e286e4210cd55151e8e8d2ce0ac2bd20fec2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/fb679336b3e7af812d058bd250588ffff9608cc3",
-                "reference": "fb679336b3e7af812d058bd250588ffff9608cc3",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/2fb5e286e4210cd55151e8e8d2ce0ac2bd20fec2",
+                "reference": "2fb5e286e4210cd55151e8e8d2ce0ac2bd20fec2",
                 "shasum": ""
             },
             "require": {
                 "ext-fileinfo": "*",
-                "illuminate/config": "4.*",
-                "illuminate/support": "4.*",
                 "php": ">=5.3.0"
             },
             "require-dev": {
@@ -196,7 +60,7 @@
                 "thumbnail",
                 "watermark"
             ],
-            "time": "2014-07-27 20:53:47"
+            "time": "2014-08-06 18:37:17"
         },
         {
             "name": "respect/validation",
@@ -245,53 +109,6 @@
                 "validator"
             ],
             "time": "2014-07-11 06:35:17"
-        },
-        {
-            "name": "symfony/finder",
-            "version": "v2.5.3",
-            "target-dir": "Symfony/Component/Finder",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/Finder.git",
-                "reference": "090fe4eaff414d8f2171c7a4748ea868d530775f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/090fe4eaff414d8f2171c7a4748ea868d530775f",
-                "reference": "090fe4eaff414d8f2171c7a4748ea868d530775f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.5-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\Finder\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Symfony Finder Component",
-            "homepage": "http://symfony.com",
-            "time": "2014-07-28 13:20:46"
         },
         {
             "name": "zendframework/zend-crypt",
@@ -344,26 +161,39 @@
         },
         {
             "name": "zendframework/zend-db",
-            "version": "2.0.8",
+            "version": "2.3.1",
             "target-dir": "Zend/Db",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/Component_ZendDb.git",
-                "reference": "4be4f8b546e91ccfabfbca698ee346082ead4487"
+                "reference": "29bb7f1ceacb32fa3e1c122bc3d14da6490aba2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packages.zendframework.com/composer/zendframework-zend-db-4be4f8b546e91ccfabfbca698ee346082ead4487-zip-c627f3.zip",
-                "reference": "2.0.8",
-                "shasum": "17efacefe0635d9d5202cc0737aa810a7d8c0d17"
+                "url": "https://packages.zendframework.com/composer/zendframework-zend-db-29bb7f1ceacb32fa3e1c122bc3d14da6490aba2c-zip-4340f1.zip",
+                "reference": "2.3.1",
+                "shasum": "4993066700cc03e2cf18fe69192e35302f8c3d27"
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.23"
+            },
+            "require-dev": {
+                "zendframework/zend-eventmanager": "self.version",
+                "zendframework/zend-servicemanager": "self.version",
+                "zendframework/zend-stdlib": "self.version"
             },
             "suggest": {
-                "zendframework/zend-stdlib": "2.0.8"
+                "zendframework/zend-eventmanager": "Zend\\EventManager component",
+                "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
+                "zendframework/zend-stdlib": "Zend\\Stdlib component"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev",
+                    "dev-develop": "2.4-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "Zend\\Db\\": ""
@@ -378,9 +208,9 @@
                 "zf2"
             ],
             "support": {
-                "source": "https://github.com/zendframework/Component_ZendDb/tree/release-2.0.8"
+                "source": "https://github.com/zendframework/Component_ZendDb/tree/release-2.3.1"
             },
-            "time": "2013-03-13 21:36:23"
+            "time": "2014-04-15 15:29:07"
         },
         {
             "name": "zendframework/zend-loader",

@@ -1,6 +1,7 @@
 <?php
 	session_start();
 
+	require "Sats.php";
 	require "Config.php";
 	require "Utility/Error.php";
 	require "Library/Captcha.php";
