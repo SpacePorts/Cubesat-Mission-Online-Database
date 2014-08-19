@@ -50,7 +50,7 @@ use Zend\Db\Sql\Ddl\Constraint;
 	{
 
 		if (strpos($ltables[$x],'Table') !== false) {
-			echo "Verfifying table class: " .  $ltables[$x] . "\n" ;
+			echo "Verifying table class: " .  $ltables[$x] . "\n" ;
 
 		    require_once("Database/".$ltables[$x]);
 		    $class = substr($ltables[$x],0,strlen($ltables[$x])-4);
