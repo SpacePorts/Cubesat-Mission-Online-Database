@@ -38,7 +38,7 @@ use Zend\Db\Sql\Ddl\Constraint;
 			return new Constraint\PrimaryKey($column);
 	}
 
-	echo "Starting_Update";
+	echo "Starting Update \n";
 
 
 	$lmetadata = new Zend\Db\Metadata\Metadata($_adapter);	
