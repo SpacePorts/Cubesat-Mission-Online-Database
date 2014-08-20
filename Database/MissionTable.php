@@ -27,9 +27,9 @@ class MissionTable extends Table
     $lmissionID->setOption('auto_increment', true);
     return array(
       array("column"=>$lmissionID,"constraints"=>array("PRIMARY KEY")),
-      array("column"=>new Column\Text("name")),
       array("column"=>new Column\Text("objective")),
       array("column"=>new Column\Text("wiki")),
+      array("column"=>new Column\Text("name")),
       array("column"=>new Column\Text("content")));
   }
 

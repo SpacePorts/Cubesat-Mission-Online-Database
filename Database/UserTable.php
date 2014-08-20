@@ -28,6 +28,22 @@ class UserTable extends Table
       array("column"=>new Column\Text("type")));
    }
 
+   public function GetRowById($id)
+   {
+   	  $sql = new Sql($this->_adapter,"user");
+
+      $lselect = $sql->Select();
+      $lselect->Where(array("user_id"=>$id));
+
+      $lresults = $sql->prepareStatementForSqlObject($lselect)->execute();
+
+      $resultSet = new ResultSet;
+      $resultSet->initialize($lresults);
+
+      foreach ($resultSet as $row) {
+        return new UserRow($row);
+      }
+   }
 
 	//tells if the user exist
 	public function CheckIfUserExist($name){
@@ -49,6 +65,49 @@ class UserTable extends Table
 			return false;
 		}
 
+	}
+
+	public function Find($page,$numerOfEntires,$where)
+	{
+
+		$sql = new Sql($this->_adapter,"user");
+		$lselect = $sql->Select();
+		$lselect->where($where);
+
+		if($numerOfEntires != -1)
+		$lselect->limit($numerOfEntires); 
+
+		$lselect->offset($page * $numerOfEntires); 
+
+		$lresults = $sql->prepareStatementForSqlObject($lselect)->execute();
+
+		$resultSet = new ResultSet;
+		$resultSet->initialize($lresults);
+
+		$lusers = array();
+		foreach ($resultSet as $row) {
+			array_push($lusers,new UserRow($row));
+		}
+
+		return $lusers;
+	}
+
+
+	public function FindCount($where)
+	{
+		$sql = new Sql($this->_adapter,"user");
+		$lselect = $sql->Select();
+		$lselect->where($where);
+		$lselect->columns(array('num' => new \Zend\Db\Sql\Expression('COUNT(*)')));
+
+		$lresults = $sql->prepareStatementForSqlObject($lselect)->execute();
+
+		$resultSet = new ResultSet;
+		$resultSet->initialize($lresults);
+
+		foreach ($resultSet as $row) {
+			return $row["num"];
+		}
 	}
 
 	//adds a user to the database

@@ -62,6 +62,11 @@ class UserRow extends Row
 		
 	}
 
+	public function GetId()
+	{
+		return $this->_id;
+	}
+
 	/*
 	*Gets the type of user
 	*/
@@ -79,6 +84,16 @@ class UserRow extends Row
 		$lupdate = $sql->update();
 		$lupdate->where(array("user_id" => $this->_id));
 		$lupdate->set(array('password' =>  sha1($password.PASSWORD_SALT)));
+
+		$sql->prepareStatementForSqlObject($lupdate)->execute();
+	}
+
+	public function ChangeType($type)
+	{
+		$sql = new Sql($this->_adapter,"user");
+		$lupdate = $sql->update();
+		$lupdate->where(array("user_id" => $this->_id));
+		$lupdate->set(array('type' =>  $type));
 
 		$sql->prepareStatementForSqlObject($lupdate)->execute();
 	}

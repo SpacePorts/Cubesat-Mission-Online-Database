@@ -1,10 +1,21 @@
 <?php
-
+require ROOT. "/Database/UserRow.php";
 class Team extends PageBase {
-
+	private $_user;
 
 	function __construct() {
+		$this->_user = UserRow::RetrieveFromSession();
 
+	}
+
+
+	public function IsUserLegal()
+	{
+		if(isset($this->_user))
+		{
+			return true;
+		}
+		return false;
 	}
 
 	function HeaderContent()
@@ -15,11 +26,7 @@ class Team extends PageBase {
 	function BodyContent()
 	{
 		 include ROOT . "\Pages\Account\SubMenu.php"; 
-		 ?>
-		 <div class="center_container">
-		 
-		 </div>
-		 <?php
+
 	}
 }
 

@@ -18,9 +18,9 @@ class SatelliteTable extends Table
 
    public function GetColumnStructure()
    {
-    $satId = new Column\Integer("sat_id");
-    $satId->setOption('auto_increment', true);
-    return array(
+      $satId = new Column\Integer("sat_id");
+      $satId->setOption('auto_increment', true);
+      return array(
       array("column"=>$satId,"constraints"=>array("PRIMARY KEY")),
       array("column"=>new Column\Text("name")),
       array("column"=>new Column\Text("content")),
