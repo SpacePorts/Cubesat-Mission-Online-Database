@@ -93,16 +93,6 @@ class SatelliteTable extends Table
 
    public function AddSatellite($name,$content,$tle,$orbit,$wiki,$status){
 
-      if(SatelliteRow::IsStatusLegal($status))
-      {
-        $sqlInsert->AddPair("status", $status);
-      }
-      else
-      {
-        //invalid entry
-          return 0;
-      }
-
 
       $sql = new Sql($this->_adapter,"satellite");
       $linsert = $sql->insert();
@@ -111,7 +101,8 @@ class SatelliteTable extends Table
        'content' => $content,
        'wiki' => $wiki,
        'tle' => $tle,
-       'orbit' => $orbit
+       'orbit' => $orbit,
+       'status'=>$status
       ));
 
       $lresults =  $sql->prepareStatementForSqlObject($linsert)->execute();
