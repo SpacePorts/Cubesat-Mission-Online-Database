@@ -1,4 +1,7 @@
 <?php 
+// ####################################
+// 140825-DVB Add COSPAR column
+// ####################################
 require_once "Database.php";
 require_once "PartTable.php";
 
@@ -8,13 +11,14 @@ use Zend\Db\ResultSet\ResultSet;
 
 class SatelliteRow extends Row
 {
-	private $_content;
 	private $_id;
 	private $_name;
-	private $_status;
-	private $_wiki;
+	private $_content;
+	private $_COSPAR;
 	private $_tle;
 	private $_orbit;
+	private $_status;
+	private $_wiki;
 
 	private $_partTable;
 
@@ -23,13 +27,49 @@ class SatelliteRow extends Row
 		parent::__construct();
 		$this->_partTable = new PartTable();
 
-		$this->_content = $SatelliteData["content"];
 		$this->_id = $SatelliteData["sat_id"];
 		$this->_name = $SatelliteData["name"];
-		$this->_status = $SatelliteData["status"];
-		$this->_wiki = $SatelliteData["wiki"];
+		$this->_content = $SatelliteData["content"];
+		$this->_COSPAR = $SatelliteData["COSPAR"];
 		$this->_tle = $SatelliteData["tle"];
 		$this->_orbit = $SatelliteData["orbit"];
+		$this->_status = $SatelliteData["status"];
+		$this->_wiki = $SatelliteData["wiki"];
+	}
+
+	public function GetId()
+	{
+		return $this->_id;
+	}
+
+	public function SetName($name)
+	{
+		$this->_name = $name;
+	}
+
+	public function GetName()
+	{
+		return $this->_name;
+	}
+
+	public function SetContent($content)
+	{
+		$this->_content = $content;
+	}
+
+	public function GetContent()
+	{
+		return $this->_content;
+	}
+
+	public function SetCOSPAR($COSPAR)
+	{
+		$this->_COSPAR = $COSPAR;
+	}
+
+	public function GetCOSPAR()
+	{
+		return $this->_COSPAR;
 	}
 
 	public function GetTle()
@@ -49,30 +89,6 @@ class SatelliteRow extends Row
 	public function SetOrbit($orbit)
 	{
 		$this->_orbit = $orbit;
-	}
-
-	public function GetId()
-	{
-		return $this->_id;
-	}
-
-	public function SetContent($content)
-	{
-		$this->_content = $content;
-	}
-	public function GetContent()
-	{
-		return $this->_content;
-	}
-
-	public function SetName($name)
-	{
-		$this->_name = $name;
-	}
-
-	public function GetName()
-	{
-		return $this->_name;
 	}
 
 	public static function IsStatusLegal($status)
@@ -120,6 +136,7 @@ class SatelliteRow extends Row
 		$lupdate->set(array(
 			"name" => $this->_name,
 			"content" => $this->_content,
+			"COSPAR"  => $this->_COSPAR,
 			"wiki" => $this->_wiki,
 			"status"=>$this->_status,
 			"tle"=>$this->_tle,

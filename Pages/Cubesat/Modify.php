@@ -1,4 +1,7 @@
 <?php
+// ####################################
+// 140825-DVB Add COSPAR column
+// ####################################
 require ROOT . "/Database/SatelliteTable.php";
 require_once ROOT . "/Database/PartTable.php";
 
@@ -107,6 +110,7 @@ class Modify extends PageBase {
 							{
 								$this->_satellite->SetName(Post("sat_name"));
 								$this->_satellite->SetContent(Post("sat_content"));
+								$this->_satellite->SetCOSPAR(Post("sat_COSPAR"));
 								$this->_satellite->SetWiki(Post("sat_wiki"));
 								$this->_satellite->SetStatus(Post("sat_status"));
 								$this->_satellite->SetTle(Post("sat_tle"));
@@ -115,7 +119,7 @@ class Modify extends PageBase {
 							}
 							else
 							{
-								$this->_satellite = $this->_satTable->AddSatellite(Post("sat_name"),Post("sat_content"),Post("sat_tle"),Post("sat_orbit"),Post("sat_wiki"),Post("sat_status"));
+								$this->_satellite = $this->_satTable->AddSatellite(Post("sat_name"),Post("sat_content"),Post("sat_COSPAR"),Post("sat_tle"),Post("sat_orbit"),Post("sat_wiki"),Post("sat_status"));
 								
 							}
 
@@ -178,6 +182,7 @@ class Modify extends PageBase {
 			$this->_form->AddHiddenInput("type","sat_form");
 			$this->_form->AddTextInput("sat_name","Name:*",$this->_satellite->GetName());
 			$this->_form->AddTextarea("sat_content","Content:",$this->_satellite->GetContent());
+			$this->_form->AddTextarea("sat_COSPAR","COSPAR:",$this->_satellite->GetCOSPAR());
 			$this->_form->AddTextInput("sat_wiki","Wiki:",$this->_satellite->GetWiki());
 			$this->_form->AddFragment("sat_status","Status:*",$this->_statusSelect);
 			$this->_form->AddTextInput("sat_tle","TLE:*",$this->_satellite->GetTle());
@@ -191,6 +196,7 @@ class Modify extends PageBase {
 			$this->_form->AddHiddenInput("type","sat_form");
 			$this->_form->AddTextInput("sat_name","Name:*");
 			$this->_form->AddTextarea("sat_content","Content:");
+			$this->_form->AddTextarea("sat_COSPAR","COSPAR:");
 			$this->_form->AddTextInput("sat_wiki","Wiki:");
 			$this->_form->AddFragment("sat_status","Status:*",$this->_statusSelect);
 			$this->_form->AddTextInput("sat_tle","TLE:*");

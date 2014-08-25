@@ -1,4 +1,8 @@
 <?php
+// ####################################
+// 140825-DVB Add COSPAR column
+// ####################################
+
 require_once ROOT . "/Database/SatelliteTable.php";
 require ROOT . "/HtmlFragments/HtmlTableFragment.php";
 class Single extends PageBase{
@@ -29,7 +33,9 @@ class Single extends PageBase{
 			<?php  if(Get("single") != "single") : ?>
 			<a href="<?php echo SITE_URL; ?>?page-id=Cubesat-Modify&sat_id=<?php echo $_GET["sat_id"];?>">Modify</a>
 			<?php endif; ?>
-			<h1><?php echo $satellite->GetName(); ?> <small> <?php echo $satellite->GetStatus(); ?></small></h1>
+			<h1><?php echo $satellite->GetName();   ?> <small> <?php echo $satellite->GetStatus(); ?></small></h1>
+
+			<p><font size="+1">COSPAR: </font> <?php echo $satellite->GetCOSPAR(); ?> </p>
 
 			
 			<h2>Parts</h2>
