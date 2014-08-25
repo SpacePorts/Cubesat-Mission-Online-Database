@@ -1,5 +1,6 @@
 <?php
 require ROOT. "/Database/UserRow.php";
+require ROOT . "/Utility/Url.php";
 class Team extends PageBase {
 	private $_user;
 
@@ -26,6 +27,13 @@ class Team extends PageBase {
 	function BodyContent()
 	{
 		 include ROOT . "\Pages\Account\SubMenu.php"; 
+		 
+		 $lAddUrl = new Url();
+		 $lAddUrl->AddPair("page-id","Account-Team-Register");
+		 ?>
+		 <h3>Teams</h3>
+		 <a href="<?php echo  $lAddUrl->Output(); ?>">Add Team</a>
+		 <?php
 
 	}
 }

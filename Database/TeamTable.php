@@ -1,7 +1,6 @@
 <?php
 require_once "Database.php";
-require_once "TeamRow.php";
-
+require_once "TeamRow.php"; 
 use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Ddl\Column;
@@ -66,7 +65,17 @@ class TeamTable extends Table
 
    public function AddTeam($name,$latLong)
    {
+      $lsql = new Sql($this->_adapter,"team");
+      $linsert = $lsql->insert();
 
+      $linsert->values(array(
+        "name" => $name,
+        "latlong" => $latlong 
+      ));
+
+      $lsql->prepareStatementForSqlObject($linsert)->execute();
+
+      return $this->GetRowById($this->_adapter->getDriver()->getLastGeneratedValue());
    }
 }
 
