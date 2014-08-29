@@ -1,4 +1,7 @@
 <?php 
+// ####################################
+// 140825-DVB Add COSPAR column
+// ####################################
 require_once "Database.php";
 require_once "SatelliteRow.php";
 
@@ -24,6 +27,7 @@ class SatelliteTable extends Table
       array("column"=>$satId,"constraints"=>array("PRIMARY KEY")),
       array("column"=>new Column\Text("name")),
       array("column"=>new Column\Text("content")),
+      array("column"=>new Column\Text("COSPAR")),
       array("column"=>new Column\Text("wiki")),
       array("column"=>new Column\Text("status")),
       array("column"=>new Column\Text("tle")),
@@ -91,7 +95,7 @@ class SatelliteTable extends Table
       }
    }
 
-   public function AddSatellite($name,$content,$tle,$orbit,$wiki,$status){
+   public function AddSatellite($name,$content,$COSPAR,$tle,$orbit,$wiki,$status){
 
 
       $sql = new Sql($this->_adapter,"satellite");
@@ -99,6 +103,7 @@ class SatelliteTable extends Table
       $linsert->values(array(
        'name' => $name,
        'content' => $content,
+       'COSPAR' => $COSPAR,
        'wiki' => $wiki,
        'tle' => $tle,
        'orbit' => $orbit,
