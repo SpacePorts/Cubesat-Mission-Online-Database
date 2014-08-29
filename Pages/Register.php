@@ -58,7 +58,7 @@ class Register  extends PageBase{
 		if(!$error->HasError())
 		{
 			$this->_userTable->AddUser($_POST["username"],$_POST["email"],$_POST["password"]);
-			$output["redirect"] = PAGE_URL . "&registered=registered";
+			$output["redirect"] = PAGE_GET_URL . "&registered=registered";
 		}
 	}
 
@@ -70,7 +70,7 @@ class Register  extends PageBase{
 			?>
 			<div class="jumbotron">
 			  <h1>Welcome!</h1>
-			  <p>This site is in a alpha state and is thus missing alot of features.</p>
+			  <p></p>
 			</div>
 			<?php
 
