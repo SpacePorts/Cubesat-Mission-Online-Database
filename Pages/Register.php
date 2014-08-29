@@ -70,7 +70,7 @@ class Register  extends PageBase{
 			?>
 			<div class="jumbotron">
 			  <h1>Welcome!</h1>
-			  <p></p>
+			  <p>you can now sign in with the top right button.</p>
 			</div>
 			<?php
 
