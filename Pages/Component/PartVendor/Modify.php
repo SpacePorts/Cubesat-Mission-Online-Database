@@ -49,6 +49,19 @@ class Modify extends PageBase {
 
 	}
 		
+	public function IsUserLegal()
+	{
+		if(isset($this->_user))
+		{
+			if($this->_user->GetType() == UserRow::PRODUCER || $this->_user->GetType() == UserRow::ADMIN)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	function HeaderContent()
 	{
 
@@ -56,8 +69,7 @@ class Modify extends PageBase {
 
 	function Ajax($error,&$output)
 	{
-		if($this->_user->GetType() == UserRow::PRODUCER)
-		{
+	
 			if(!v::string()->notEmpty()->validate(Post("model_number")))
 				$error->AddErrorPair("model_number","Model Number Required");
 
@@ -90,7 +102,7 @@ class Modify extends PageBase {
 				else
 					$output["redirect"] = SITE_URL . "?page-id=Component-PartVendor-Modify&part_vendor_id=".$this->_partVendor->GetId();
 			}
-		}
+		
 	}
 
 	function BodyContent()
