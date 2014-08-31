@@ -4,6 +4,7 @@ class Url
 	private $_valuePair ;
 	function __construct() {
 		$this->_valuePair = array();
+
 	}
 
 	function AddArray($value,$ignore = array())
@@ -21,6 +22,9 @@ class Url
 
 	function Output($baseUrl = SITE_URL)
 	{
+		if($baseUrl == SITE_URL && Post("single") != "" && Get("single") != "")
+			$this->AddPair("single","single");
+
 		$lurl = $baseUrl . "?";
 		$lfirst = true;
 		foreach ($this->_valuePair as $key => $value) {

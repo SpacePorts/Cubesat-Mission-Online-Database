@@ -10,13 +10,14 @@
 	//creates an error handler
 	$lerror = new Error();
 	$loutput = array();
+	$lredirect = "";
 
 	if(isset($_GET["page-id"]))
 	{
 
 		$page = new PageHandle($_GET["page-id"]);
 		if($page->GetPage()->IsUserLegal())
-		$page->GetPage()->Ajax($lerror,$loutput);
+		$lredirect = $page->GetPage()->Ajax($lerror,$loutput);
 
 	}
 	else if(isset($_GET["json-id"]))//used for custom ajax
@@ -31,11 +32,12 @@
 			{
 				require "JsonHandlers/" . $listedPages[$x];
 				$json = new Json();
-				$json->Exectute($lerror,$loutput);
+				$lredirect = $json->Exectute($lerror,$loutput);
 			}
 		}
 	}
-
+	if($lredirect != "")
+	$loutput["redirect"] = $lredirect;
 	$loutput["error"] = $lerror->Output();
 	echo json_encode($loutput);
 

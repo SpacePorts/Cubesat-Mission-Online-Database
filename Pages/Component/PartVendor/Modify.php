@@ -1,4 +1,5 @@
 <?php
+
 require_once ROOT . "/Database/PartVendorTable.php";
 require_once ROOT . "/Database/PartTable.php";
 require_once ROOT . "/Database/VendorTable.php";
@@ -96,6 +97,8 @@ class Modify extends PageBase {
 				{
 					$this->_partVendor = $this->_partVendorTable->AddPartVendor(Post("catalog_entry"),$vendor,$component,Post("model_number"));
 				}
+
+
 
 				if(Post("single") == "single")
 					$output["redirect"] = SITE_URL. "?page-id=Component-PartVendor-Modify&part_vendor_id=".$this->_partVendor->GetId() . "&single=single";

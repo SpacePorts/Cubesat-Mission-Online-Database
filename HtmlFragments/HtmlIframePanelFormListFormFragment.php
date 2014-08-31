@@ -43,7 +43,15 @@ class HtmlIframePanelFormListFormFragment
 				<input type="text"  class='form-control' placeholder="Search" action="<?php echo $this->_searchAction; ?>" search-id="<?php echo  $this->_searchName; ?>"/>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"></ul>
 			</div>
-
+			<div class="refrence" style="display:none;">
+				<div class="panel panel-default retractable-panel">
+					 <div class="panel-heading"><a href="#" class="expand-button"><span class="glyphicon-plus"></span></a><span class="title"></span><a href='#' class='delete-button pull-right'>X</a></div>
+					<div class="panel-body" style="display:none;">
+						<iframe seamless title-extract="<?php echo $this->_titleExtract ?>" extract="<?php echo $this->_extract; ?>" src=""></iframe>
+						
+					</div>
+				</div>
+			</div>
 			<div class="iframe-container">
 				<?php for($x = 0; $x < count($this->_iframeUrl);$x++): ?>
 				<div class="panel panel-default retractable-panel">

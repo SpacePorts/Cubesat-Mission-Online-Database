@@ -87,7 +87,7 @@ $(document).ready(function(){
 	$(".iframe-list").delegate(".dropdown-menu li a","click",function(){
 		$(this).parent().parent().parent().parent().parent().find(".dropdown").removeClass("open");
 		
-		var lpanel = $(this).parent().parent().parent().parent().parent().find(".retractable-panel").first().clone();
+		var lpanel = $(this).parent().parent().parent().parent().parent().find(".refrence div").first().clone();
 		lpanel.attr("src",$(this).attr("action"));
 		lpanel.find("iframe").attr("src",$(this).attr("action"))
 		lpanel.find("iframe").load(function(){
@@ -120,7 +120,7 @@ $(document).ready(function(){
 	});
 
 	$(".iframe-list").delegate(".add-another","click",function(){
-		var lpanel = $(this).parent().find(".retractable-panel").first().clone();
+		var lpanel = $(this).parent().find(".refrence div").first().clone();
 		lpanel.find("iframe").attr("src",$(this).attr("action"))
 		lpanel.find("iframe").load(function(){
 			FormProcess(lpanel.find("iframe"));

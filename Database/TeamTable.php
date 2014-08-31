@@ -1,6 +1,7 @@
 <?php
 require_once "Database.php";
-require_once "TeamRow.php"; 
+require_once "TeamRow.php";
+require_once "UserRow.php";
 use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Ddl\Column;
@@ -27,25 +28,41 @@ class TeamTable extends Table
 
    public function GetRowById($id)
    {
-   		$statment = new SqlStatment("team",$this->_db);
-   		$statment->EqualTo("team_id",$id);
-   		$stmt =  $statment->Execute();
+      $lsql = new Sql($this->_adapter,"team");
 
-  		while ($row = $stmt->fetch()) {
-  			return new TeamRow($row );
-  		}
+      $lselect = $lsql->Select();
+      $lselect->Where(array("team_id"=>$id));
+
+      $lresults = $lsql->prepareStatementForSqlObject($lselect)->execute();
+
+      $resultSet = new ResultSet;
+      $resultSet->initialize($lresults);
+
+      foreach ($resultSet as $row) {
+        return new TeamRow($row);
+      }
+
+
+
    }
 
 
-   public function Find($page,$numerOfEntires,$where)
+   public function Find($page,$numerOfEntires,$where,$user = NULL)
    {
       $sql = new Sql($this->_adapter,"team");
       $lselect = $sql->Select();
-      $lselect->where($where);
 
       if($numerOfEntires != -1)
       $lselect->limit($numerOfEntires); 
 
+      if(!is_null($user))
+      {
+    
+        $lselect->join("relation_teams_users","relation_teams_users.team_id = team.team_id");
+        $where->equalTo("relation_teams_users.user_id",$user->GetId());
+      }
+
+      $lselect->where($where);
       $lselect->offset($page * $numerOfEntires); 
 
       $lresults = $sql->prepareStatementForSqlObject($lselect)->execute();
@@ -63,6 +80,8 @@ class TeamTable extends Table
 
    }
 
+
+
    public function AddTeam($name,$latLong)
    {
       $lsql = new Sql($this->_adapter,"team");
@@ -70,7 +89,7 @@ class TeamTable extends Table
 
       $linsert->values(array(
         "name" => $name,
-        "latlong" => $latlong 
+        "latlong" => $latLong 
       ));
 
       $lsql->prepareStatementForSqlObject($linsert)->execute();
