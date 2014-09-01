@@ -78,9 +78,9 @@ function AjaxFormHandling(form)
 		var lformAction = $(this).attr("action");
 		var lformData = new FormData(this);
 		var lsubmitted= false;
-		var lnumberOfIframes = $(lform).find("iframe").length;
+		var lnumberOfIframes = $(lform).find(".iframe-container iframe").length;
 
-		$(lform).find("iframe").each(function(){
+		$(lform).find(".iframe-container iframe").each(function(){
 
 				$(this).contents().find("form").submit();
 
@@ -102,7 +102,7 @@ function AjaxFormHandling(form)
 						lsubmitted = true;
 						lformData = new FormData(lform);
 						MainFormProcess($(lform),lformData,lformAction,function(){
-							$(lform).find("iframe").each(function(){
+							$(lform).find(".iframe-container iframe").each(function(){
 								$(this).attr("src",$(this).attr("srcs"));
 
 							});
