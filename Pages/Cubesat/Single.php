@@ -5,6 +5,8 @@
 
 require_once ROOT . "/Database/SatelliteTable.php";
 require ROOT . "/HtmlFragments/HtmlTableFragment.php";
+require "Navigation.php";
+
 class Single extends PageBase{
 	private $_satelliteTable;
 
@@ -25,32 +27,31 @@ class Single extends PageBase{
 
 	function BodyContent()
 	{
+		$satellite = $this->_satelliteTable->GetRowById($_GET["sat_id"]); 
+		Navigation(Get("sat_id"),Get("page-id"));
+		?>
 
-		$satellite = $this->_satelliteTable->GetRowById($_GET["sat_id"]); ?>
+		<?php  if(Get("single") != "single") : ?>
+	
+		<?php endif; ?>
+		<h1><?php echo $satellite->GetName();   ?> <small> <?php echo $satellite->GetStatus(); ?></small></h1>
 
+		<p><font size="+1">COSPAR: </font> <?php echo $satellite->GetCOSPAR(); ?> </p>
 
+		
+		<h2>Parts</h2>
 
-			<?php  if(Get("single") != "single") : ?>
-			<a href="<?php echo SITE_URL; ?>?page-id=Cubesat-Modify&sat_id=<?php echo $_GET["sat_id"];?>">Modify</a>
-			<?php endif; ?>
-			<h1><?php echo $satellite->GetName();   ?> <small> <?php echo $satellite->GetStatus(); ?></small></h1>
+		<ul>
+		<?php 
+		$lparts = $satellite->GetParts();
+		for($x =0;$x < count($lparts);$x++): ?>
+		<li><?php echo $lparts[$x]->GetFormalSpecification();?></li>
+		<?php endfor; ?> 
+		</ul>
 
-			<p><font size="+1">COSPAR: </font> <?php echo $satellite->GetCOSPAR(); ?> </p>
+		<h2>Description</h2>
 
-			
-			<h2>Parts</h2>
-
-			<ul>
-			<?php 
-			$lparts = $satellite->GetParts();
-			for($x =0;$x < count($lparts);$x++): ?>
-			<li><?php echo $lparts[$x]->GetFormalSpecification();?></li>
-			<?php endfor; ?> 
-			</ul>
-
-			<h2>Description</h2>
-
-			<?php echo $satellite->GetContent();
+		<?php echo $satellite->GetContent();
 
 	}
 

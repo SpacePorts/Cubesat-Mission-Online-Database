@@ -22,7 +22,7 @@ class Url
 
 	function Output($baseUrl = SITE_URL)
 	{
-		if($baseUrl == SITE_URL && Post("single") != "" && Get("single") != "")
+		if($baseUrl == SITE_URL && Post("single") != "" || Get("single") != "")
 			$this->AddPair("single","single");
 
 		$lurl = $baseUrl . "?";

@@ -1,6 +1,19 @@
 function FormProcess(iframe)
 {
 	$(iframe).contents().find("input[type=submit]").css("display","none");
+
+	if($(iframe).hasClass("read-only"))
+	{
+		$(iframe).contents().find("input").attr("readonly","");
+		$(iframe).contents().find("textarea").attr("readonly","");
+		$(iframe).contents().find("select").attr("disabled","");
+		$(iframe).contents().find("button").css("display","none");
+		$(iframe).contents().find(".delete-button").css("display","none");
+		$(iframe).contents().find("iframe").addClass("read-only");
+		$(iframe).contents().find("iframe").each(function(){
+			FormProcess($(this));
+		});
+	}
 	
 	$(iframe).contents().find("form").on("DOMSubtreeModified",function(){
 			IFrameError(iframe);

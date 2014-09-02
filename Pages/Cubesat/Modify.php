@@ -14,6 +14,7 @@ require_once ROOT . "/Database/UserTable.php";
 require ROOT . "/Database/HistoryTable.php";
 
 require ROOT . "/Utility/Url.php";
+require "Navigation.php";
 
 use Respect\Validation\Validator as v;
 use Zend\Db\Sql\Where;
@@ -36,14 +37,15 @@ class Modify extends PageBase {
 		$this->_user = UserRow::RetrieveFromSession();
 		$this->_historyTable = new HistoryTable();
 
-		if(isset($_REQUEST["sat_id"]))
-		{
-			$this->_satellite = $this->_satTable->GetRowById($_REQUEST["sat_id"]);
-		}
-		else if(Get("history-id") != "")
+	
+		 if(Get("history-id") != "")
 		{
 
 			$this->_satellite = new SatelliteRow($this->_historyTable->GetRowById(Get("history-id"))->GetData());
+		}
+		else if(isset($_REQUEST["sat_id"]))
+		{
+			$this->_satellite = $this->_satTable->GetRowById($_REQUEST["sat_id"]);
 		}
 
 
@@ -202,6 +204,8 @@ class Modify extends PageBase {
 			$this->_form->AddTextInput("sat_orbit","Orbit:*",$this->_satellite->GetOrbit());
 			$this->_form->AddFragment("sat_parts","Parts:*", $this->_PartSelection);
 			$this->_form->AddSubmitButton("Modify Satellite");
+		
+			Navigation(Get("sat_id"),Get("page-id"));
 		}
 		else
 		{
@@ -220,38 +224,41 @@ class Modify extends PageBase {
 
 		$this->_form->Output();
 		
-		$lhistory = $this->_historyTable->GetHistory($this->_satTable->GetTable(),$this->_satellite->GetId());
+		/*$lhistory = $this->_historyTable->GetHistory($this->_satTable->GetTable(),$this->_satellite->GetId());
 
 		?>
-		<h2>History</h2>
-		<div class="list-group">
-
 		<?php
-
-		$lcurrentURL = new Url();
-		$lcurrentURL->AddPair("page-id","Cubesat-Modify");
-		$lcurrentURL->AddPair("sat_id",$this->_satellite->GetId());
-
-
-		?>
-			<a class="list-group-item" href="<?php echo $lcurrentURL->Output(); ?>"> Current</a>
-		<?php
-		for($x = 0; $x < sizeof($lhistory);$x++)
+		if(isset($this->_satellite))
 		{
-
-		$lhistoryURL = new Url();
-		$lhistoryURL->AddPair("page-id","Cubesat-Modify");
-		$lhistoryURL->AddPair("history-id",$lhistory[$x]->GetId());
-
-		?>
-				<a class="list-group-item" href="<?php echo  $lhistoryURL->Output(); ?>"> <?php echo $lhistory[$x]->GetDateTime(); ?></a>
-		<?php
-		}
-		?>
+			$lcurrentURL = new Url();
+			$lcurrentURL->AddPair("page-id","Cubesat-Modify");
+			$lcurrentURL->AddPair("sat_id",$this->_satellite->GetId());
 
 
-		</div>
-		<?php
+			?>
+			<h2>History</h2>
+			<div class="list-group">
+
+			<a class="list-group-item <?php if(Get("history-id") == "") echo "active"; ?>" href="<?php echo $lcurrentURL->Output(); ?>"> Current</a>
+			<?php
+			for($x = 0; $x < sizeof($lhistory);$x++)
+			{
+
+			$lhistoryURL = new Url();
+			$lhistoryURL->AddPair("page-id","Cubesat-Modify");
+			$lhistoryURL->AddPair("history-id",$lhistory[$x]->GetId());
+			$lhistoryURL->AddPair("sat_id",$this->_satellite->GetId());
+
+			?>
+				<a class="list-group-item <?php if(Get("history-id") == $lhistory[$x]->GetId()) echo "active"; ?>" href="<?php echo  $lhistoryURL->Output(); ?>"> <?php echo $lhistory[$x]->GetDateTime(); ?></a>
+			<?php
+			}
+			?>
+
+
+			</div>
+			<?php
+		}*/
 
 	}
 
