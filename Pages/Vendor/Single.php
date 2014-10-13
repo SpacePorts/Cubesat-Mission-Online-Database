@@ -9,8 +9,8 @@ class Single extends PageBase {
 		$this->_vendorTable = new VendorTable();
 		$this->_vendorRow = $this->_vendorTable->GetRowById($_GET["vendor-id"]);
 	}
-	
-	function HeaderContent()
+
+	function HeaderContent($libraries)
 	{
 
 	}
@@ -22,7 +22,7 @@ class Single extends PageBase {
 
 		<div class="center_container">
 			<a href="<?php echo SITE_URL; ?>?page-id=Vendor-Modify&vendor-id=<?php echo $this->_vendorRow->GetId();?>">Modify</a>
-			
+
 			<h1><?php echo $this->_vendorRow->GetName(); ?> :  <?php echo $this->_vendorRow->GetType(); ?></h1>
 			<h2>Type</h2>
 			<?php echo $this->_vendorRow->GetType(); ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Table
 {
@@ -21,9 +21,6 @@ class Table
 	{
 
 	}
-
-
-
 }
 
 class Row
@@ -38,7 +35,6 @@ class Row
 		    'password' => USER_PASSWORD
 		 ));
 	}
-
 
 }
 

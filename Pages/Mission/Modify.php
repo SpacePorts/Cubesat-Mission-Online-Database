@@ -3,8 +3,12 @@ require_once ROOT . "/Database/MissionTable.php";
 require_once ROOT . "/Database/SatelliteTable.php";
 require_once ROOT . "/Database/UserTable.php";
 
+require ROOT . "/Database/HistoryTable.php";
+
 require ROOT . "/HtmlFragments/HtmlFormFragment.php";
 require ROOT . "/HtmlFragments/HtmlIframePanelFormListFormFragment.php";
+
+require "Navigation.php";
 
 use Respect\Validation\Validator as v;
 use Zend\Db\Sql\Where;
@@ -19,6 +23,8 @@ class Modify extends PageBase {
 	private $_form;
 	private $_satelliteFrame;
 
+	private $_historyTable;
+
 	function __construct() {
 		$this->_user = UserRow::RetrieveFromSession();
 
@@ -26,25 +32,36 @@ class Modify extends PageBase {
 		$this->_form = new HtmlFormFragment(PAGE_GET_AJAX_URL);
 		$this->_satelliteFrame = new HtmlIframePanelFormListFormFragment("sat_id","sat_search","sat_name",PAGE_GET_AJAX_URL,SITE_URL . "?page-id=Cubesat-Modify&single=single");
 		$this->_satelliteTable = new SatelliteTable();
-		if(isset($_REQUEST["mission_id"]))
+		$this->_historyTable = new HistoryTable();
+
+
+		if(Get("history-id") != "")
+		{
+
+		}
+		else if(isset($_REQUEST["mission_id"]))
 		{
 			$this->_mission = $this->_missionTable->GetRowById($_REQUEST["mission_id"]);
 		}
 
 	}
-	public function HeaderContent()
+	public function HeaderContent($libraries)
 	{
-		?>
-		<script type="text/javascript" src="<?php echo SITE_URL; ?>/Public/Iframe.js"></script>
- 	
-		<?php
+		$this->_satelliteFrame->Header($libraries);
+
 	}
 
+	/**
+	*returns the page id
+	**/
 	public function GetPageID()
 	{
 		return "Mission-Modify";
 	}
 
+	/**
+	*checks if the user is legal
+	**/
 	public function IsUserLegal()
 	{
 		if(isset($this->_user))
@@ -60,7 +77,7 @@ class Modify extends PageBase {
 
 	function Ajax($error,&$output)
 	{
-	
+
 			switch (Post("type")) {
 				case 'mission-form':
 
@@ -112,12 +129,12 @@ class Modify extends PageBase {
 					}
 					$this->_satelliteFrame->Ajax($output);
 				break;
-				
+
 				default:
 					# code...
 					break;
 			}
-		
+
 
 	}
 
@@ -142,6 +159,8 @@ class Modify extends PageBase {
 			$this->_form->AddTextInput("mission_wiki","Wiki:",$this->_mission->GetWiki());
 			$this->_form->AddFragment("satellites","Satellite",$this->_satelliteFrame);
 			$this->_form->AddSubmitButton("Modify Mission","pull-right");
+
+			Navigation(Get("mission_id"),Get("page-id"));
 		}
 		else
 		{
@@ -154,7 +173,7 @@ class Modify extends PageBase {
 			$this->_form->AddFragment("satellites","Satellite",$this->_satelliteFrame);
 			$this->_form->AddSubmitButton("Add Mission","pull-right");
 		}
-	
+
 		$this->_form->Output();
 
 	}

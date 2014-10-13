@@ -30,7 +30,7 @@ class User extends PageBase{
 
 	}
 
-	function HeaderContent()
+	function HeaderContent($libraries)
 	{
 
 	}
@@ -54,7 +54,7 @@ class User extends PageBase{
 			case 'RegisterUser':
 				# code...
 				break;
-			
+
 			default:
 				# code...
 				break;
@@ -65,7 +65,7 @@ class User extends PageBase{
 
 	function BodyContent()
 	{
-		include ROOT . "\Pages\Account\SubMenu.php"; 
+		include ROOT . "\Pages\Account\SubMenu.php";
 
 
 		$this->_searchForm->AddBlock("<label>Search</label>");
@@ -75,7 +75,7 @@ class User extends PageBase{
 		$this->_searchForm->AddSubmitButton("search","pull-right");
 
 		$this->_searchForm->Output();
-	
+
 		$lwhere = new Where();
 		$lwhere->Like("user_name","%".Get("user_name")."%");
 		$lusers = $this->_userTable->Find($this->_pagination->GetPage(),10,$lwhere);

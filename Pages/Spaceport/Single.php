@@ -8,9 +8,9 @@ class Single extends PageBase
 	function __construct() {
 		$this->_spaceportTable = new SpaceportTable();
 		$this->_spaceport = $this->_spaceportTable->GetRowById(Get("spaceport_id"));
-	
+
 	}
-	public function HeaderContent()
+	public function HeaderContent($libraries)
 	{
 
 	}
@@ -22,7 +22,7 @@ class Single extends PageBase
 
 	function Ajax($error,&$output)
 	{
-	
+
 	}
 
 

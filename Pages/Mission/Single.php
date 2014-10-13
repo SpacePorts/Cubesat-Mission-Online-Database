@@ -2,6 +2,8 @@
 require_once ROOT . "/Database/MissionTable.php";
 require ROOT . "/HtmlFragments/HtmlIframePanelFragment.php";
 
+require "Navigation.php";
+
 class Single extends PageBase{
 
 	private $_mission;
@@ -15,9 +17,9 @@ class Single extends PageBase{
 		$this->_mission = $this->_missionTable->GetRowById(Get("mission_id"));
 
 		$this->_satelliteFrame = new HtmlIframePanelFragment();
-	
+
 	}
-	public function HeaderContent()
+	public function HeaderContent($libraries)
 	{
 
 		?>
@@ -32,12 +34,14 @@ class Single extends PageBase{
 
 	function Ajax($error,&$output)
 	{
-	
+
 	}
 
 
 	public function BodyContent()
 	{
+		Navigation(Get("mission_id"),Get("page-id"));
+
 		$satellites = $this->_mission->GetSatellites();
 		for($x = 0; $x < count($satellites);$x++)
 		{
@@ -50,7 +54,7 @@ class Single extends PageBase{
 
 		<?php
 
-		?><h2>Satellites</h2><?php 
+		?><h2>Satellites</h2><?php
 		$this->_satelliteFrame->Output();
 
 		?><h2>Content</h2><?php

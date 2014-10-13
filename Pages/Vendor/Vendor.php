@@ -20,16 +20,16 @@ class Vendor  extends PageBase{
 	function __construct() {
 		$this->_htmlTableFragment = new HtmlTableFragment("table table-striped table-hover");
 		$this->_vendorTable = new VendorTable();
-		
+
 		$this->_searchForm = new HtmlFormFragment(SITE_URL,"GET","","search_form");
 		$this->_search = new HtmlSearchFragment("sat_column","search",Get("search"),Get("sat_column"));
 		$this->_pagination = new HtmlPaginationFragment(7,"page",SITE_URL);
-	
+
 		$this->_search->AddSearchOption("vendor-name","Name");
 		$this->_search->AddSearchOption("vendor-type","Type");
 	}
-	
-	function HeaderContent()
+
+	function HeaderContent($libraries)
 	{
 
 	}
@@ -48,7 +48,7 @@ class Vendor  extends PageBase{
 
 
 	<div class="center_container">
-		
+
 		<?php
 		$this->_searchForm->AddFragment("search","Search:",$this->_search);
 		$this->_searchForm->AddHiddenInput("page-id", $this->GetPageID());

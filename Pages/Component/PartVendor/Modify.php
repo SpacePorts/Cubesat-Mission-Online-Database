@@ -46,10 +46,10 @@ class Modify extends PageBase {
 		{
 			$this->_vendorDropdown->AddOption($vendors[$x]->GetId(),$vendors[$x]->GetName());
 		}
-		
+
 
 	}
-		
+
 	public function IsUserLegal()
 	{
 		if(isset($this->_user))
@@ -63,14 +63,14 @@ class Modify extends PageBase {
 		return false;
 	}
 
-	function HeaderContent()
+	function HeaderContent($libraries)
 	{
 
 	}
 
 	function Ajax($error,&$output)
 	{
-	
+
 			if(!v::string()->notEmpty()->validate(Post("model_number")))
 				$error->AddErrorPair("model_number","Model Number Required");
 
@@ -105,7 +105,7 @@ class Modify extends PageBase {
 				else
 					$output["redirect"] = SITE_URL . "?page-id=Component-PartVendor-Modify&part_vendor_id=".$this->_partVendor->GetId();
 			}
-		
+
 	}
 
 	function BodyContent()

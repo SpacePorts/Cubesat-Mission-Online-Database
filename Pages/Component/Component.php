@@ -27,8 +27,8 @@ class Component extends PageBase {
 
 		$this->_search->AddSearchOption("component-formal","Formal Specification");
 	}
-		
-	function HeaderContent()
+
+	function HeaderContent($libraries)
 	{
 
 	}
@@ -45,7 +45,7 @@ class Component extends PageBase {
 		$this->_searchForm->AddFragment("search","Search:",$this->_search);
 		$this->_searchForm->AddHiddenInput("page-id", $this->GetPageID());
 		$this->_searchForm->AddSubmitButton("search","pull-right");
-		
+
 		$lwhere = new Where();
 
 		if(Get('search') != "")

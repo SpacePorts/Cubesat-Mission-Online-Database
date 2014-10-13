@@ -18,7 +18,7 @@ class Single extends PageBase {
 
 
 	public function IsUserLegal()
-	{ 
+	{
 
 		if(isset($this->_user))
 		{
@@ -28,7 +28,7 @@ class Single extends PageBase {
 
 	}
 
-	function HeaderContent()
+	function HeaderContent($libraries)
 	{
 
 	}

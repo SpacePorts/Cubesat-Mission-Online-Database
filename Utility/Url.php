@@ -20,6 +20,11 @@ class Url
 		$this->_valuePair[$key] = $value;
 	}
 
+	function removeKey($key)
+	{
+		unset($this->_valuePair[$key]);
+	}
+
 	function Output($baseUrl = SITE_URL)
 	{
 		if($baseUrl == SITE_URL && Post("single") != "" || Get("single") != "")

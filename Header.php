@@ -8,7 +8,7 @@ $luser = UserRow::RetrieveFromSession();
 
 $pages = array(
 	array("page_name"=>"Home","page-id" => "Home"),
-	array("page_name"=>"Reports","page-id" => "Reports","sub_menu" => array(array("page_name"=>"Cubesat","page-id" => "Cubesat"),array("page_name"=>"Vendor","page-id" => "Vendor"),array("page_name"=>"Component","page-id" => "Component"),array("page_name"=>"Mission","page-id" => "Mission"),array("page_name"=>"Spaceport","page-id" => "Spaceport"))),
+	array("page_name"=>"Reports","page-id" => "Reports","sub_menu" => array(array("page_name"=>"Satellite","page-id" => "Satellite"),array("page_name"=>"Vendor","page-id" => "Vendor"),array("page_name"=>"Component","page-id" => "Component"),array("page_name"=>"Mission","page-id" => "Mission"),array("page_name"=>"Spaceport","page-id" => "Spaceport"))),
 	array("page_name"=>"Contact","page-id" => "Contact"),
 	array("page_name"=>"Help","page-id" => "Help"));
 
@@ -52,13 +52,13 @@ $registerForm->AddSubmitButton("Sign Up");
 
 					<a id=""  data-toggle="dropdown" class="dropdown-toggle" href="#">
 						<?php echo $luser->GetUsername(); ?> <span class="caret"></span>
-					</a> 
+					</a>
 					<ul class="dropdown-menu" >
 						<li><a href="<?php echo  SITE_URL. "?page-id=Account"; ?>">Account</a></li>
 						<li><a href="#" id="user_logout">Logout</a></li>
 					</ul>
 				<?php endif; ?>
-			
+
 			</li>
 	 	</ul>
 
@@ -67,5 +67,3 @@ $registerForm->AddSubmitButton("Sign Up");
 
 
 <?php }?>
-
-

@@ -1,9 +1,9 @@
-<?php 
+<?php
 class PageBase{
 	public function __construct() {
 	}
 
-	public function HeaderContent()
+	public function HeaderContent($libraries)
 	{
 
 	}

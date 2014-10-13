@@ -16,15 +16,15 @@ class Modify extends PageBase {
 		$this->_user = UserRow::RetrieveFromSession();
 		$this->_partTable = new PartTable();
 		$this->_form = new HtmlFormFragment(PAGE_GET_AJAX_URL);
-	
+
 		if(Get("component_id") != "")
 		{
 			$this->_component = $this->_partTable->GetRowById(Get("component_id"));
 		}
 
 	}
-		
-	function HeaderContent()
+
+	function HeaderContent($libraries)
 	{
 
 	}
@@ -44,10 +44,10 @@ class Modify extends PageBase {
 
 	function Ajax($error,&$output)
 	{
-	
+
 		if(empty($_POST["component_formal_specification"]))
 			$error->AddErrorPair("component_formal_specification","Formal Specification required");
-		
+
 
 		if(!isset($_POST["component_description"]))
 			$_POST["component_description"] = "Description Required";
@@ -71,14 +71,14 @@ class Modify extends PageBase {
 			else
 				$output["redirect"] = SITE_URL . "?page-id=Component-Modify&component_id=".$this->_component->GetId();
 		}
-		
+
 	}
 
 	function BodyContent()
 	{
 		if(Get("single"))
 			$this->_form->AddHiddenInput("single","single");
-		
+
 		if(isset($this->_component))
 		{
 			$this->_form->AddHiddenInput("component_id",$this->_component->GetId());
@@ -88,7 +88,7 @@ class Modify extends PageBase {
 		}
 		else
 		{
-			
+
 			$this->_form->AddTextInput("component_formal_specification","Formal Specification:*");
 			$this->_form->AddTextInput("component_description","Component Description:*");
 			$this->_form->AddSubmitButton("Add Spaceport","pull-right");

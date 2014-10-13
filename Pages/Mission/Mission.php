@@ -8,6 +8,9 @@ require ROOT . "/HtmlFragments/HtmlFormFragment.php";
 require ROOT . "/HtmlFragments/HtmlSearchFragment.php";
 require ROOT . "/HtmlFragments/HtmlPaginationFragment.php";
 
+
+require "Navigation.php";
+
 use Zend\Db\Sql\Where;
 class Mission extends PageBase {
 	private $_user;
@@ -21,7 +24,7 @@ class Mission extends PageBase {
 	private $_pagination;
 	function __construct() {
 		$this->_user = UserRow::RetrieveFromSession();
-		
+
 		if(empty($_GET["mission-column"]))
 			$_GET["mission-column"]="";
 		if(empty($_GET["search"]))
@@ -45,10 +48,10 @@ class Mission extends PageBase {
 		return "Mission";
 	}
 
-	public function HeaderContent()
+	public function HeaderContent($libraries)
 	{
 
-	
+
 
 	}
 
@@ -57,12 +60,12 @@ class Mission extends PageBase {
 		$this->_searchForm->AddFragment("search","Search:",$this->_search);
 		$this->_searchForm->AddSubmitButton("search","pull-right");
 		$this->_searchForm->AddHiddenInput("page-id", $this->GetPageID());
-		
+
 		$lwhere = new Where();
 
 		if($_GET["mission-column"] == "mission-objective")
 			$lwhere->Like("objective","%".$_GET["search"]."%");
-		else 
+		else
 			$lwhere->Like("name","%".$_GET["search"]."%");
 
 		$missions = $this->_missionTable->Find($this->_pagination->GetPage(),10,$lwhere);
@@ -75,7 +78,7 @@ class Mission extends PageBase {
 			"<a href='" . PAGE_GET_URL . "-Single&mission_id=".$missions[$x]->GetID()."'>" .$missions[$x]->GetName() . "</a>",
 			"<a href='" . PAGE_GET_URL . "-Single&mission_id=".$missions[$x]->GetID()."'>" .$missions[$x]->GetObjective(). "</a>"
 			));
-		
+
 		}
 
 		$this->_searchForm->Output();

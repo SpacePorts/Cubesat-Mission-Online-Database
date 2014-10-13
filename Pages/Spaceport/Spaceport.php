@@ -28,8 +28,8 @@ class Spaceport extends PageBase {
 
 		$this->_search->AddSearchOption("vendor-name","Name");
 	}
-		
-	function HeaderContent()
+
+	function HeaderContent($libraries)
 	{
 
 	}

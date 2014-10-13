@@ -33,7 +33,7 @@ class Modify extends PageBase {
 		return false;
 	}
 
-	function HeaderContent()
+	function HeaderContent($libraries)
 	{
 
 	}
@@ -47,7 +47,7 @@ class Modify extends PageBase {
 
 		if(!$error->HasError())
 		{
-			$lurl = new Url();	
+			$lurl = new Url();
 			$this->_team = $this->_teamTable->AddTeam(Post("team_name"),Post("team_latlong"));
 			$this->_team->AddUser($this->_user);
 
@@ -55,7 +55,7 @@ class Modify extends PageBase {
 			$lurl->AddPair("team-id",$this->_team->GetId());
 			return $lurl->Output();
 		}
-	
+
 	}
 
 	function BodyContent()
@@ -64,15 +64,15 @@ class Modify extends PageBase {
 		{
 			$this->_form->AddTextInput("team_name","Name:*",$this->_team->GetName());
 			$this->_form->AddTextInput("team_latlong","Lat Long:",$this->_team->GetLatLong());
-			$this->_form->AddSubmitButton("Register"); 
-			$this->_form->Output();		
+			$this->_form->AddSubmitButton("Register");
+			$this->_form->Output();
 		}
 		else
 		{
 			$this->_form->AddTextInput("team_name","Name:*");
 			$this->_form->AddTextInput("team_latlong","Lat Long:");
-			$this->_form->AddSubmitButton("Register"); 
-			$this->_form->Output();		
+			$this->_form->AddSubmitButton("Register");
+			$this->_form->Output();
 		}
 
 	}

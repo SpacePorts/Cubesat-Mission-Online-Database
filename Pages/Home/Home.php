@@ -9,11 +9,11 @@ class Home extends PageBase {
 
 	 function OverlayContent()
 	{
-		
+
 	}
 
 
-	public function HeaderContent()
+	public function HeaderContent($libraries)
 	{
 
 

@@ -5,13 +5,13 @@ class Single extends PageBase{
 
 	private $_partVendorTable;
 	private $_partVendor;
-	
+
 	function __construct() {
 		$this->_partVendorTable = new PartVendorTable();
 		$this->_partVendor = $this->_partVendorTable->GetRowById(Get("part_vendor_id"));
 	}
-		
-	function HeaderContent()
+
+	function HeaderContent($libraries)
 	{
 
 	}

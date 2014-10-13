@@ -9,7 +9,7 @@ use Zend\Mail\Transport\Sendmail as SendmailTransport;
 class Contact extends PageBase {
 	private $_form;
 	private $_message;
-	function HeaderContent()
+	function HeaderContent($libraries)
 	{
 		$this->_form = new HtmlFormFragment(PAGE_GET_AJAX_URL);
 	}

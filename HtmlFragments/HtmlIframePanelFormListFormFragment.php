@@ -17,13 +17,18 @@ class HtmlIframePanelFormListFormFragment
 		$this->_addAction = $addAction;
 	}
 
+	public function Header($libraries)
+	{
+$libraries->AddJavascript(SITE_URL . "/Public/Iframe.js");
+	}
+
 	public function AddIframe($action){
 		array_push($this->_iframeUrl, $action);
 	}
 
 	public function addSearchPair($name,$action)
 	{
-		array_push($this->_searchPair,array("action"=> $action,"name"=>$name));	
+		array_push($this->_searchPair,array("action"=> $action,"name"=>$name));
 	}
 
 	public function Ajax(&$output)
@@ -48,7 +53,7 @@ class HtmlIframePanelFormListFormFragment
 					 <div class="panel-heading"><a href="#" class="expand-button"><span class="glyphicon-plus"></span></a><span class="title"></span><a href='#' class='delete-button pull-right'>X</a></div>
 					<div class="panel-body" style="display:none;">
 						<iframe seamless title-extract="<?php echo $this->_titleExtract ?>" extract="<?php echo $this->_extract; ?>" src=""></iframe>
-						
+
 					</div>
 				</div>
 			</div>
@@ -58,7 +63,7 @@ class HtmlIframePanelFormListFormFragment
 					 <div class="panel-heading"><a href="#" class="expand-button"><span class="glyphicon-plus"></span></a><span class="title"></span><a href='#' class='delete-button pull-right'>X</a></div>
 					<div class="panel-body" style="display:none;">
 						<iframe seamless title-extract="<?php echo $this->_titleExtract ?>" extract="<?php echo $this->_extract; ?>" src="<?php echo $this->_iframeUrl[$x]; ?>"></iframe>
-						
+
 					</div>
 				</div>
 				<?php endfor;?>

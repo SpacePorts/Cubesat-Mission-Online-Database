@@ -8,7 +8,7 @@ require ROOT . "/HtmlFragments/HtmlSearchFragment.php";
 require ROOT . "/HtmlFragments/HtmlPaginationFragment.php";
 
 use Zend\Db\Sql\Where;
-class Cubesat extends PageBase {
+class Satellite extends PageBase {
 
 	private $_htmlTableFragment;
 	private $_satelliteTable;
@@ -28,7 +28,7 @@ class Cubesat extends PageBase {
 		$this->_satelliteTable = new SatelliteTable();
 		$this->_searchForm = new HtmlFormFragment(SITE_URL,"GET","","search_form");
 		$this->_search = new HtmlSearchFragment("sat_column","search",Get("search"),Get("sat_column"));
-		$this->_statusSelect = new HtmlDropdownFragment("sat_status",Get("sat_status"));	
+		$this->_statusSelect = new HtmlDropdownFragment("sat_status",Get("sat_status"));
 
 		$this->_statusSelect->AddOption("","All");
 		$this->_statusSelect->AddOption("active","active");
@@ -45,8 +45,8 @@ class Cubesat extends PageBase {
 		$this->_search->AddSearchOption("sat-orbit","Orbit");
 		$this->_search->AddSearchOption("sat-tle","TLE");
 	}
-		
-	function HeaderContent()
+
+	function HeaderContent($libraries)
 	{
 
 	}
@@ -73,7 +73,7 @@ class Cubesat extends PageBase {
 			case "sat-orbit":
 					$lwhere->Like("orbit","%".Get("search")."%");
 				break;
-		
+
 			default:
 				$lwhere->Like("name","%".Get("search")."%");
 				break;
@@ -108,7 +108,7 @@ class Cubesat extends PageBase {
 		?>
 		</div>
 		<?php
-	
+
 	}
 
 }

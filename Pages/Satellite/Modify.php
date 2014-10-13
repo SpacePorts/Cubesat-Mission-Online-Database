@@ -30,15 +30,15 @@ class Modify extends PageBase {
 	private $_statusSelect;
 
 	private $_historyTable;
-	
+
 	function __construct() {
 		$this->_partTable = new PartTable();
 		$this->_satTable = new SatelliteTable();
 		$this->_user = UserRow::RetrieveFromSession();
 		$this->_historyTable = new HistoryTable();
 
-	
-		 if(Get("history-id") != "")
+
+		if(Get("history-id") != "")
 		{
 
 			$this->_satellite = new SatelliteRow($this->_historyTable->GetRowById(Get("history-id"))->GetData());
@@ -50,9 +50,9 @@ class Modify extends PageBase {
 
 
 		if(isset($this->_satellite))
-			$this->_statusSelect = new HtmlDropdownFragment("sat_status",$this->_satellite->GetStatus());		
+			$this->_statusSelect = new HtmlDropdownFragment("sat_status",$this->_satellite->GetStatus());
 		else
-			$this->_statusSelect = new HtmlDropdownFragment("sat_status");		
+			$this->_statusSelect = new HtmlDropdownFragment("sat_status");
 
 		$this->_PartSelection = new HtmlIframePanelFormListFormFragment("component_id","component_search","component_formal_specification",PAGE_GET_AJAX_URL,SITE_URL . "?page-id=Component-Modify&single=single");
 
@@ -68,18 +68,15 @@ class Modify extends PageBase {
 		$this->_statusSelect->AddOption("entry-closed","entry closed");
 
 	}
-		
-	function HeaderContent()
-	{
-		?>
-			<script type="text/javascript" src="<?php echo SITE_URL; ?>/Public/Iframe.js"></script>
-		<?php
 
+	function HeaderContent($libraries)
+	{
+		$this->_PartSelection->Header($libraries);
 	}
 
 	function GetPageID()
 	{
-		return  "Cubesat-Modify";
+		return  "Satellite-Modify";
 	}
 
 	public function IsUserLegal()
@@ -97,7 +94,7 @@ class Modify extends PageBase {
 
 	function Ajax($error,&$output)
 	{
-	
+
 			switch (Post("type"))
 			{
 				case 'sat_form':
@@ -108,7 +105,7 @@ class Modify extends PageBase {
 							$error->AddErrorPair("sat_status","Status required");
 						if(!($this->_statusSelect->IsOptionValid(Post("sat_status"))))
 							$error->AddErrorPair("sat_status","Please select a Status");
-						
+
 						if(Post("sat_tle") == "")
 							$error->AddErrorPair("sat_tle","TLE required");
 
@@ -134,15 +131,15 @@ class Modify extends PageBase {
 							else
 							{
 								$this->_satellite = $this->_satTable->AddSatellite(Post("sat_name"),Post("sat_content"),Post("sat_COSPAR"),Post("sat_tle"),Post("sat_orbit"),Post("sat_wiki"),Post("sat_status"));
-								
+
 							}
 							$this->_historyTable->AddHistoryItem($this->_user,$this->_satTable->GetTable(),"sat_id",$this->_satellite->GetId());
 
 							$lcomponents =   array();
 							if(Post("component_id") != "")
 								$lcomponents = array_unique(Post("component_id"));
-								
-			
+
+
 							for($x = 0; $x < count($lcomponents);$x++)
 							{
 								$lcomponents[$x] = $this->_partTable->GetRowById($lcomponents[$x]);
@@ -152,14 +149,14 @@ class Modify extends PageBase {
 							$this->_satellite->AddParts($lcomponents);
 
 							if(Post("single") == "single")
-								$output["redirect"] = SITE_URL . "?page-id=Cubesat-Modify&sat_id=".$this->_satellite->GetId() . "&single=single";
+								$output["redirect"] = SITE_URL . "?page-id=Satellite-Modify&sat_id=".$this->_satellite->GetId() . "&single=single";
 							else
-								$output["redirect"] = SITE_URL . "?page-id=Cubesat-Modify&sat_id=".$this->_satellite->GetId();
-							
+								$output["redirect"] = SITE_URL . "?page-id=Satellite-Modify&sat_id=".$this->_satellite->GetId();
+
 						}
-					
+
 				break;
-				
+
 				case "component_search":
 
 					$lwhere = new Where();
@@ -181,14 +178,14 @@ class Modify extends PageBase {
 	{
 		if(Get("single"))
 			$this->_form->AddHiddenInput("single","single");
-		
+
 
 		if(isset($this->_satellite))
 		{
 			$parts = $this->_satellite->GetParts();
 			for($x =0; $x < count($parts);$x++)
 			{
-				
+
 				$this->_PartSelection->AddIFrame(SITE_URL . "?page-id=Component-Modify&single=single&component_id=".$parts[$x]->GetId());
 			}
 
@@ -204,12 +201,12 @@ class Modify extends PageBase {
 			$this->_form->AddTextInput("sat_orbit","Orbit:*",$this->_satellite->GetOrbit());
 			$this->_form->AddFragment("sat_parts","Parts:*", $this->_PartSelection);
 			$this->_form->AddSubmitButton("Modify Satellite");
-		
+
 			Navigation(Get("sat_id"),Get("page-id"));
 		}
 		else
 		{
-	
+
 			$this->_form->AddHiddenInput("type","sat_form");
 			$this->_form->AddTextInput("sat_name","Name:*");
 			$this->_form->AddTextarea("sat_content","Content:");
@@ -223,7 +220,7 @@ class Modify extends PageBase {
 		}
 
 		$this->_form->Output();
-		
+
 		/*$lhistory = $this->_historyTable->GetHistory($this->_satTable->GetTable(),$this->_satellite->GetId());
 
 		?>

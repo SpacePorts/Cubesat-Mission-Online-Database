@@ -9,13 +9,13 @@ class Single extends PageBase{
 
 	function __construct() {
 		$this->_htmlTableFragment = new HtmlTableFragment("table table-striped table-hover");
-		
+
 		$this->_partTable = new PartTable();
 		if(Get("component_id") != "")
 			$this->_part = $this->_partTable->GetRowById(Get("component_id"));
 	}
-		
-	function HeaderContent()
+
+	function HeaderContent($libraries)
 	{
 
 	}

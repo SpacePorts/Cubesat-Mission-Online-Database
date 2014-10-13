@@ -15,7 +15,7 @@ class Modify extends PageBase{
 	private $_typeSelect;
 
 	function __construct() {
-		
+
 		$this->_userTable = new UserTable();
 		$this->_user = UserRow::RetrieveFromSession();
 		if(Get("user-id") != "")
@@ -36,7 +36,7 @@ class Modify extends PageBase{
 		$this->_userForm = new HtmlFormFragment(PAGE_GET_AJAX_URL);
 	}
 
-	function HeaderContent()
+	function HeaderContent($libraries)
 	{
 
 	}
@@ -46,7 +46,7 @@ class Modify extends PageBase{
 
 		if(!$this->_typeSelect->IsOptionValid(Post("user_type")))
 		{
-			$error->AddErrorPair("user_type","Invalid User Type");	
+			$error->AddErrorPair("user_type","Invalid User Type");
 		}
 
 		if(!$error->HasError())

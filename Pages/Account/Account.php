@@ -23,7 +23,7 @@ class Account extends PageBase{
 		$this->_imageStorage = new ImageStorage();
 	}
 
-	function HeaderContent()
+	function HeaderContent($libraries)
 	{
 
 	}
@@ -70,7 +70,7 @@ class Account extends PageBase{
 	function BodyContent()
 	{
 
-		include ROOT . "\Pages\Account\SubMenu.php"; 
+		include ROOT . "\Pages\Account\SubMenu.php";
 
 		$this->_changePasswordForm->AddBlock("<h4>Change Password</h4>");
 		$this->_changePasswordForm->AddPasswordInput("current_password","Current Password");

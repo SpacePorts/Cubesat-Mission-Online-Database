@@ -1,6 +1,6 @@
 <?php
 class Copyright  extends PageBase{
-function HeaderContent()
+function HeaderContent($libraries)
 {
 
 }

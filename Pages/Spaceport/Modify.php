@@ -30,8 +30,8 @@ class Modify extends PageBase {
 		}
 
 	}
-		
-	function HeaderContent()
+
+	function HeaderContent($libraries)
 	{
 
 	}
@@ -50,7 +50,7 @@ class Modify extends PageBase {
 
 	function Ajax($error,&$output)
 	{
-		
+
 		if(!v::string()->notEmpty()->validate(Post("spaceport_name")))
 				$error->AddErrorPair("spaceport_name","Name Required");
 
@@ -95,10 +95,10 @@ class Modify extends PageBase {
 				$this->_spacePort->SetCity(Post("city"));
 				$this->_spacePort->SetZip(Post("zip"));
 				$this->_spacePort->Update();
-			}	
+			}
 			else
 			{
-		
+
 				$this->_spacePort = $this->_spaceportTable->AddSpaceport(
 					Post("spaceport_name"),
 					Post("spaceport_latlong"),
@@ -117,9 +117,9 @@ class Modify extends PageBase {
 				$output["redirect"] = SITE_URL . "?page-id=Spaceport-Modify&spaceport_id=".$this->_spacePort->GetId() . "&single=single";
 			else
 				$output["redirect"] = SITE_URL . "?page-id=Spaceport-Modify&spaceport_id=".$this->_spacePort->GetId();
-			
+
 		}
-		
+
 	}
 
 
@@ -132,12 +132,12 @@ class Modify extends PageBase {
 			$this->_form->AddHiddenInput("spaceport_id",$this->_spacePort->GetId());
 			$this->_form->AddTextInput("spaceport_name","Name:*",$this->_spacePort->GetName());
 			$this->_form->AddTextInput("spaceport_latlong","Latlong:*",$this->_spacePort->GetLatLong());
-			
+
 
 			$this->_form->AddTextInput("spaceport_url","Url:",$this->_spacePort->GetUrl());
 			$this->_form->AddTextInput("spaceport_description","Description:*",$this->_spacePort->GetDescription());
 			$this->_form->AddTextInput("spaceport_url_googlemap","GoogleMap URL:",$this->_spacePort->GetGoogleMapUrl());
-		
+
 			$this->_form->AddBlock("</br>");
 			$this->_form->AddTextInput("country","Country:*",$this->_spacePort->GetCountry());
 			$this->_form->AddTextInput("state","State:*",$this->_spacePort->GetState());
@@ -157,7 +157,7 @@ class Modify extends PageBase {
 			$this->_form->AddTextInput("spaceport_url","Url:");
 			$this->_form->AddTextarea("spaceport_description","Description:*");
 			$this->_form->AddTextInput("spaceport_url_googlemap","GoogleMap URL:");
-			
+
 
 			$this->_form->AddBlock("</br>");
 			$this->_form->AddTextInput("country","Country:*");
@@ -171,7 +171,7 @@ class Modify extends PageBase {
 
 			$this->_form->AddSubmitButton("Add Spaceport");
 		}
-		$this->_form->Output(); 
+		$this->_form->Output();
 	}
 
 }

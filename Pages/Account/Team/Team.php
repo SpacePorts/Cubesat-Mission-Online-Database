@@ -31,15 +31,15 @@ class Team extends PageBase {
 		return false;
 	}
 
-	function HeaderContent()
+	function HeaderContent($libraries)
 	{
 
 	}
 
 	function BodyContent()
 	{
-		 include ROOT . "\Pages\Account\SubMenu.php"; 
-		 
+		 include ROOT . "\Pages\Account\SubMenu.php";
+
 		 $lAddUrl = new Url();
 		 $lAddUrl->AddPair("page-id","Account-Team-Modify");
 		 ?>
@@ -61,7 +61,7 @@ class Team extends PageBase {
 		 		$this->_htmlTableFragment->AddBodyRow(array(
 				"<a href='". $lteamSingle->Output()."'>".$teams[$x]->GetName() . "</a>",
 				"<a href='". $lteamSingle->Output()."'>".$teams[$x]->GetLatLong()  . "</a>"));
-		 	
+
 		 }
 		   $this->_htmlTableFragment->Output();
 	}

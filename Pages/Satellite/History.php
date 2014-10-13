@@ -28,7 +28,7 @@ class History extends PageBase {
 	private $_currentSatellite;
 
 
-	
+
 	function __construct() {
 		$this->_comparisonFragment = new HtmlComparisonFragment();
 		$this->_historyTable = new HistoryTable();
@@ -38,32 +38,28 @@ class History extends PageBase {
 
 
 	}
-		
-	function HeaderContent()
+
+	function HeaderContent($libraries)
 	{
-		?>
-			<script type="text/javascript" src="<?php echo SITE_URL; ?>/Public/Iframe.js"></script>
-		<?php
-
-
+		$this->_comparisonFragment->Header($libraries);
 	}
 
 	function GetPageID()
 	{
-		
+
 	}
 
 	public function IsUserLegal()
 	{
 		return true;
-		
+
 	}
 
 
 	function Ajax($error,&$output)
 	{
-	
-		
+
+
 
 	}
 
@@ -72,12 +68,11 @@ class History extends PageBase {
 		$lcompareOneURL = new Url();
 		$lcompareTwoURL = new Url();
 
-		$lcompareOneURL->AddPair("page-id","Cubesat-Modify");
-		$lcompareOneURL->AddPair("single","single");
+		$lcompareOneURL->AddPair("page-id","Satellite-Modify");
 
-		$lcompareTwoURL->AddPair("page-id","Cubesat-Modify");
+		$lcompareTwoURL->AddPair("page-id","Satellite-Modify");
 		$lcompareTwoURL->AddPair("single","single");
-		
+
 
 
 		if(Get("compare1") == ""  || Get("compare1") == "current")
@@ -91,41 +86,53 @@ class History extends PageBase {
 			$lcompareTwoURL->AddPair("sat_id",$this->_currentSatellite->GetId());
 		else
 			$lcompareTwoURL->AddPair("history-id",Get("compare2"));
+
+		$lcompareOneURL->AddPair("sat_id",$this->_currentSatellite->GetId());
+		$lcompareTwoURL->AddPair("sat_id",$this->_currentSatellite->GetId());
 	?>
 
 	<?php
-		/*$this->_comparisonFragment->AddComparisonPair("Name",$this->_compareOneSatellite->GetName(),$this->_compareTwoSatellite->GetName());
-		$this->_comparisonFragment->AddComparisonPair("Content",$this->_compareOneSatellite->GetContent(),$this->_compareTwoSatellite->GetContent());
-		$this->_comparisonFragment->AddComparisonPair("COSPAR",$this->_compareOneSatellite->GetCOSPAR(),$this->_compareTwoSatellite->GetCOSPAR());
-		$this->_comparisonFragment->AddComparisonPair("Wiki",$this->_compareOneSatellite->GetWiki(),$this->_compareTwoSatellite->GetWiki());
-		$this->_comparisonFragment->AddComparisonPair("Status",$this->_compareOneSatellite->GetStatus(),$this->_compareTwoSatellite->GetStatus());
-		$this->_comparisonFragment->AddComparisonPair("TLE",$this->_compareOneSatellite->GetTle(),$this->_compareTwoSatellite->GetTle());
-		$this->_comparisonFragment->AddComparisonPair("Orbit",$this->_compareOneSatellite->GetOrbit(),$this->_compareTwoSatellite->GetOrbit());
-		*/
 		Navigation(Get("sat_id"),Get("page-id"));
 
 		?></br><?php
 		$this->_comparisonFragment->Output();
 
 		$lcurrentURL = new Url();
-		$lcurrentURL->AddPair("page-id","Cubesat-History");
+		$lcurrentURL->AddPair("page-id","Satellite-History");
 		$lcurrentURL->AddPair("sat_id",$this->_currentSatellite->GetId());
 
 
 		?>
 		<div class="row">
 			<div class="col-xs-6">
-				<iframe seamless class="read-only" src="<?php echo $lcompareOneURL->Output(); ?>"></iframe>
+				<div>
+					<a href="<?php
+					$lcompareOneURL->removeKey("single");
+					 echo $lcompareOneURL->Output();
+					 	$lcompareOneURL->AddPair("single","single");
+					 	 ?>">Modify</a>
+
+
+				</div>
+				<iframe seamless class="read-only" src="<?php echo $lcompareOneURL->Output(); ?> "></iframe>
 			</div>
 			<div class="col-xs-6">
-			<iframe seamless class="read-only" src="<?php echo $lcompareTwoURL->Output(); ?>"></iframe>
+				<div>
+					<a href="<?php
+					$lcompareTwoURL->removeKey("single");
+					 echo $lcompareTwoURL->Output();
+					 	$lcompareTwoURL->AddPair("single","single");
+					 	 ?>">Modify</a>
+
+				</div>
+				<iframe seamless class="read-only" src="<?php echo $lcompareTwoURL->Output(); ?>"></iframe>
 			</div>
 		</div>
 
 		<form method="GET" action="<?php echo SITE_URL; ?>" >
 			<h2>Compare</h2>
 			<input type='submit' value='Compare'/>
-			<input type="hidden" name="page-id" value="Cubesat-History" />
+			<input type="hidden" name="page-id" value="Satellite-History" />
 			<input type="hidden" name="sat_id" value="<?php echo $this->_currentSatellite->GetId(); ?>" />
 
 			<ul class="list-group">
@@ -133,7 +140,7 @@ class History extends PageBase {
 				<?php
 
 				?>  <li class="list-group-item"><input type="radio" name="compare1" value="current" <?php if(Get("compare1") == "current" || Get("compare1") == "") echo "checked"; ?>><input type="radio" name="compare2" value="current" <?php if(Get("compare2") == "current" || Get("compare2") == "") echo "checked"; ?>>current<?php
-				
+
 				for($x = 0; $x < count($this->_satelliteHistory);$x++)
 				{
 				?>
